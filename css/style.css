@@ -1,0 +1,40 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+}
+
+body{
+    display: flex;
+    font-family: 'Roboto', sans-serif;
+}
+
+.menu{
+    width: 350px;
+    height: 100vh;
+    background-color: #4A69BD;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 40px;
+
+    font-size: 4rem;
+    font-weight: 300;
+    color: white;
+}
+
+.menu li{
+    margin-top: 10px;
+    cursor: pointer;
+}
+.menu li:hover{
+    color: #0a3d62;
+}
+
+.content{
+    width: calc(100vw - 350px);
+    height: 100vh;
+    background-color: #ADC2D1;
+}
