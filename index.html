@@ -8,39 +8,61 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/requests.css">
+  <link rel="stylesheet" href="./css/customers.css">
+  <link rel="stylesheet" href="./css/stock.css">
+  <link rel="stylesheet" href="./css/cash.css">
+  <link rel="stylesheet" href="./css/management.css">
 </head>
 <body>
   <div class="menu">
     <nav>
       <ul>
-        <li>Pedidos</li>
-        <li>Clientes</li>
-        <li>Estoque</li>
-        <li>Caixa</li>
-        <li>Gerência</li>
+        <li id="btn_requests">Pedidos</li>
+        <li id="btn_customers">Clientes</li>
+        <li id="btn_stock">Estoque</li>
+        <li id="btn_cash">Caixa</li>
+        <li id="btn_management">Gerência</li>
       </ul>
     </nav>
   </div>
 
   <div class="content">
 
-    <div class="requests">
+    <div id="page_requests">
+
+      <div class="request">
+        <div class="request_status request_status_waiting"></div>
+        <h1 class="request_address">Setor Céu Azul, Rua 03, Lote 15, Ap 05, próximo ao Hospital Fulano de tal</h1>
+          <h2 class="request_itens">1 Gás P13 e 1 Água</h2>
+      </div>
+
+      <div class="request">
+        <div class="request_status request_status_started"></div>
+        <h1 class="request_address">Quadra 307 Sul, Rua 02, Lote 12, QI 15, AP 05. Condomínio Maison Ana Julia</h1>
+          <h2 class="request_itens">4 Gás P13</h2>
+      </div>
 
     </div>
   
-    <div class="customers">
-  
+    <div id="page_customers">
+      page_customers
     </div>
   
-    <div class="stock">
-      
+    <div id="page_stock">
+      page_stock
     </div>
   
-    <div class="cash">
-  
+    <div id="page_cash">
+      page_cash
+    </div>
+
+    <div id="page_management">
+      page_management
     </div>
 
   </div>
 
+  <script src="./js/viewcontroller.js"></script>
 </body>
 </html>

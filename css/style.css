@@ -22,7 +22,9 @@ body{
 
     font-size: 4rem;
     font-weight: 300;
-    color: white;
+    color: #FFF;
+
+    user-select: none;
 }
 
 .menu li{
