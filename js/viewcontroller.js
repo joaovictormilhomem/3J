@@ -43,3 +43,51 @@ btnManagement.onclick = () => {
     pageManagement.style.display = 'block';
     activePage = 5;
 }
+
+function createRequest(request) {
+    console.log(request);
+    let newRequest = document.createElement('div');
+    newRequest.classList.add('request');
+    newRequest.setAttribute('data-id', request.id);
+
+    let newRequestStatus = document.createElement('div');
+    newRequestStatus.classList.add('request_status');
+    newRequestStatus.classList.add('request_status_'+request.data().status);
+
+    let newRequestAddress = document.createElement('h1');
+    newRequestAddress.classList.add('request_address');
+    newRequestAddress.innerHTML = request.data().address;
+
+    let newRequestItems = document.createElement('h2');
+    newRequestItems.classList.add('request_items');
+    if(request.data().items.p13 && request.data().items.water)
+        newRequestItems.innerHTML = request.data().items.p13+' gás P13 e '+request.data().items.water+' água';
+    else if(request.data().items.p13)
+        newRequestItems.innerHTML = request.data().items.p13+' gás P13';
+    else if(request.data().items.water)
+        newRequestItems.innerHTML = request.data().items.water+' águas';
+    
+    newRequest.appendChild(newRequestStatus);
+    newRequest.appendChild(newRequestAddress);
+    newRequest.appendChild(newRequestItems);
+    pageRequests.appendChild(newRequest);
+    console.log(newRequest);
+}
+
+function renderRequests(requests) {
+    requests.forEach(request => {
+        createRequest(request);
+    });
+}
+
+function clearRequests() {
+    pageRequests.innerHTML = '';
+}
+
+let handleRenderRequests = setInterval(() => {
+    if(requestListCopy !== requestList){
+        requestListCopy = requestList;
+        clearRequests();
+        renderRequests(requestList);
+    }
+}, 500)

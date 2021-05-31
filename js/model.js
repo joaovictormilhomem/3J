@@ -11,4 +11,29 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 
+let requestList = [];
+let requestListCopy = [];
+
 var db = firebase.firestore();
+
+function startLookingForChanges() {
+    let handleListenerRequests = db.collection('requests').onSnapshot((collection) => {
+        requestList = collection.docs;
+    })
+}
+
+function createRequest(customer, address, items) {
+    db.collection('requests').add({
+        customer: customer,
+        address: address,
+        items: items,
+        status: 'waiting'
+    }).then((doc)=>{
+        console.log('request created');
+    }).catch(err=>{
+        console.log(err);
+    })
+}
+
+startLookingForChanges();
+//createRequest('clientes/NgqQPMvE5BzcbGYk5OlJ', 'Bairro São João, Rua Rodoviario, N° 1276. Próximo ao centro comunitário.', {agua: 1, p13: 1})
