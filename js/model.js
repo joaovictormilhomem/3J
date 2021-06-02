@@ -35,5 +35,5 @@ function createRequest(customer, address, items) {
     })
 }
 
-//startLookingForChanges();
+startLookingForChanges();
 //createRequest('clientes/NgqQPMvE5BzcbGYk5OlJ', 'Bairro São João, Rua Rodoviario, N° 1276. Próximo ao centro comunitário.', {agua: 1, p13: 1})
