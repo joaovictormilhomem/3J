@@ -40,3 +40,20 @@ body{
     height: 100vh;
     background-color: #ADC2D1;
 }
+
+.add-btn{
+    background-image: url(../assets/add_circle_black_24dp.svg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    width: 72px;
+    height: 72px;
+
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+
+    cursor: pointer;
+    user-select: none;
+
+    display: none;
+}

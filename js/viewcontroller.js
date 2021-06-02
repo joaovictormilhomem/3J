@@ -12,6 +12,9 @@ const btnCash       = document.getElementById('btn_cash');
 const btnManagement = document.getElementById('btn_management');
 const menuButtons   = [btnRequests, btnCustomers, btnStock, btnCash, btnManagement];
 
+const addButtons = document.getElementsByClassName('add-btn');
+
+
 let activePage = 1;
 
 btnRequests.onclick = () => {
@@ -81,7 +84,19 @@ function renderRequests(requests) {
 }
 
 function clearRequests() {
-    pageRequests.innerHTML = '';
+    pageRequests.innerHTML = '<div class="add-btn" id="add-btn-requests"></div>';
+    startAddButtons();
+}
+
+function startAddButtons() {
+
+    addButtons[0].onclick = () => {
+        console.log('add request');
+        //createRequest(customer, address, items)
+    }
+
+    for (i = 0; i < addButtons.length; i++)
+        addButtons[i].style.display = 'block';
 }
 
 let handleRenderRequests = setInterval(() => {
