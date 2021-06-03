@@ -22,7 +22,7 @@ function startLookingForChanges() {
     })
 }
 
-function createRequestOnServer(customer, address, items) {
+function createRequest(customer, address, items) {
     db.collection('requests').add({
         customer: customer,
         address: address,
@@ -36,4 +36,3 @@ function createRequestOnServer(customer, address, items) {
 }
 
 startLookingForChanges();
-//createRequest('clientes/NgqQPMvE5BzcbGYk5OlJ', 'Bairro São João, Rua Rodoviario, N° 1276. Próximo ao centro comunitário.', {agua: 1, p13: 1})

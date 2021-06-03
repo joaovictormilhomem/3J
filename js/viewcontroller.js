@@ -47,7 +47,7 @@ btnManagement.onclick = () => {
     activePage = 5;
 }
 
-function createRequest(request) {
+function requestModel(request) {
     let newRequest = document.createElement('div');
     newRequest.classList.add('request');
     newRequest.setAttribute('data-id', request.id);
@@ -76,9 +76,7 @@ function createRequest(request) {
 }
 
 function renderRequests(requests) {
-    requests.forEach(request => {
-        createRequest(request);
-    });
+    requests.forEach(request => requestModel(request));
 }
 
 function clearRequests() {
@@ -86,18 +84,27 @@ function clearRequests() {
     startAddButtons();
 }
 
+function handleNewRequestClick(form) {
+    let client = form.children[1].value;
+    let address = form.children[3].value;
+    let itens = {p13: form.children[5].value, water: form.children[7].value};
+
+    createRequest(client, address, itens);
+}
+
 function showNewRequestPopup() {
     const newReqPopup = document.getElementById('new-request-popup');
+    const newButton   = newReqPopup.children[0].children[8];
+    const closeButton = newReqPopup.children[0].children[9];
+
     newReqPopup.style.display = 'flex';
-    newReqPopup.lastElementChild.lastElementChild.onclick = () => newReqPopup.style.display = 'none';
+    closeButton.onclick = () => newReqPopup.style.display = 'none';
+    newButton.onclick = () => handleNewRequestClick(newReqPopup.children[0]);
 }
 
 function startAddButtons() {
 
-    addButtons[0].onclick = () => {
-        showNewRequestPopup();
-        //createRequestOnServer(null, 'Rua Fulano de tal, Numero 420', {p13: 2});
-    }
+    addButtons[0].onclick = () => showNewRequestPopup();
 
     for (i = 0; i < addButtons.length; i++)
         addButtons[i].style.display = 'block';
