@@ -22,7 +22,7 @@ function startLookingForChanges() {
     })
 }
 
-function createRequest(customer, address, items) {
+function createRequestOnServer(customer, address, items) {
     db.collection('requests').add({
         customer: customer,
         address: address,

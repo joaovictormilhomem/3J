@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="./css/stock.css">
   <link rel="stylesheet" href="./css/cash.css">
   <link rel="stylesheet" href="./css/management.css">
+  <link rel="stylesheet" href="./css/popups.css">
 </head>
 <body>
 
@@ -52,6 +53,31 @@
 
     <div id="page_management">
       page_management
+    </div>
+  </div>
+
+  <div class="popup" id="new-request-popup">
+    <div class="popup-container">
+
+      <label for="select-clients">Cliente</label>
+      <select name="select-clients" id="select-clients">
+        <option value="" selected>Sem cadastro</option>
+        <option value="João">João</option>
+        <option value="Pedro">Pedro</option>
+      </select>
+
+      <label for="input-address">Endereço</label>
+      <input type="text" id="input-address" name="input-address">
+      
+      <label for="input-p13">P13</label>
+      <input type="number" id="input-p13" name="input-p13">
+
+      <label for="input-water">Água</label>
+      <input type="number" id="input-water" name="input-water">
+
+      <button>Novo</button>
+
+      <button id="close-popup-button">X</button>
     </div>
   </div>
 

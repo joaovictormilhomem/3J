@@ -48,7 +48,6 @@ btnManagement.onclick = () => {
 }
 
 function createRequest(request) {
-    console.log(request);
     let newRequest = document.createElement('div');
     newRequest.classList.add('request');
     newRequest.setAttribute('data-id', request.id);
@@ -74,7 +73,6 @@ function createRequest(request) {
     newRequest.appendChild(newRequestAddress);
     newRequest.appendChild(newRequestItems);
     pageRequests.appendChild(newRequest);
-    console.log(newRequest);
 }
 
 function renderRequests(requests) {
@@ -88,11 +86,17 @@ function clearRequests() {
     startAddButtons();
 }
 
+function showNewRequestPopup() {
+    const newReqPopup = document.getElementById('new-request-popup');
+    newReqPopup.style.display = 'flex';
+    newReqPopup.lastElementChild.lastElementChild.onclick = () => newReqPopup.style.display = 'none';
+}
+
 function startAddButtons() {
 
     addButtons[0].onclick = () => {
-        console.log('add request');
-        //createRequest(customer, address, items)
+        showNewRequestPopup();
+        //createRequestOnServer(null, 'Rua Fulano de tal, Numero 420', {p13: 2});
     }
 
     for (i = 0; i < addButtons.length; i++)
