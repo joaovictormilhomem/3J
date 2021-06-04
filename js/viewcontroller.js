@@ -89,7 +89,7 @@ function handleNewRequestClick(form) {
     let address = form.children[3].value;
     let itens = {p13: form.children[5].value, water: form.children[7].value};
 
-    createRequest(client, address, itens);
+    createRequest(client, address, itens);  
 }
 
 function showNewRequestPopup() {
