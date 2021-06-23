@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validar</title>
+    
+    <link rel="stylesheet" href="./css/entregar.css">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <button id="back-btn" class="header-btn"></button>
+    </header>
+    <div id="login-screen" class="screen slide-in">
+        <div class="login-container slide-in">
+            <h1>Login</h1>
+
+            <form id="send-code-form" class="form">
+                <input type="text" class="form-input" id="user-number-input" placeholder="Insira o seu número de telefone">
+                <button type='button' class="form-btn" id="send-code-btn">Enviar</button>
+            </form>
+
+            <form id="verification-form" class="form" style="display: none;">
+                <input type="text" class="form-input" id="user-code-input" placeholder="Insira o código que recebeu">
+                <button type='button' class="form-btn" id="login-btn">Entrar</button>
+            </form>
+        </div>
+        <div id='recaptcha-container'></div>
+    </div>
+
+    <div id="loading-screen">
+        <div id="loading"></div>
+    </div>
+    
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-analytics.js"></script>
+</body>
+</html>

@@ -7,6 +7,12 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    position: relative;
+}
+.request:hover{
+    border-radius: 20px;
+    background-color: rgb(74, 105, 189, 0.1);
+    transition: ease-in-out 0.2s background-color,border-radius;
 }
 
 .request_status{
@@ -28,6 +34,21 @@
 .request_address{
     font-size: 2rem;
     font-weight: 500;
+}
+
+.deny-request{
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color var(--hover-transition-time) ease-in-out;
+    user-select: none;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
+.deny-request:hover{
+    background-color: rgba(255, 0, 0, 0.5);
 }
 
 .request_items{

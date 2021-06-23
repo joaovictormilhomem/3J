@@ -10,6 +10,11 @@ body{
     font-family: 'Roboto', sans-serif;
 }
 
+.text-base{
+    font-family: Roboto, sans-serif;
+    color: #FFF;
+}
+
 .menu{
     width: 350px;
     height: 100vh;
@@ -55,5 +60,63 @@ body{
     cursor: pointer;
     user-select: none;
 
-    display: none;
+    display: block;
+}
+
+@keyframes show{
+    from{
+        transform: translateX(10px);
+        opacity: 0;
+    }
+    to{
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes copied{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+@keyframes slide-in{
+    from{
+        transform: translateX(-100vw);
+    }
+    to{
+        transform: translateX(0);
+    }
+}
+
+@keyframes slide-out{
+    from{
+        transform: translateX(0);
+    }
+    to{
+        transform: translateX(100vw);
+    }
+}
+
+@media (min-width: 600px) {
+
+    .request-validation{
+        max-width: 800px;
+    }
+
+    .form-btn{
+        width: 400px;
+    }
+
+    .form-input{
+        width: 400px;
+        padding: 0 20px;
+    }
+
+    .op{
+        width: 400px;
+    }
 }
