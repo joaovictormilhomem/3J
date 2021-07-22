@@ -48,6 +48,33 @@ function deleteRequest(id, collection) {
     })
 }
 
+function createClient(name, address, birthday, phone) {
+    let now = new Date().valueOf();
+    db.collection('clients').add({
+        name: name,
+        address: address,
+        birthday: birthday,
+        phone: phone,
+        status: 'active',
+        startTime: now
+    }).then((doc)=>{
+    }).catch(err=>{
+        console.log(err);
+    })
+}
+
+function deleteClient(id, collection) {
+    let now = new Date().valueOf();
+    db.collection(collection).doc(id).update({
+        status: 'deleted',
+        //controller: auth.currentUser.email,
+        deleteTime: now
+    }).then(() => {
+    }).catch(error => {
+        console.log(error);
+    })
+}
+
 startLookingForChanges();
 
 /* function startRequest(id, collection) {
@@ -62,24 +89,7 @@ startLookingForChanges();
     })
 } */
 
-
 /*
-
- var firebaseConfig = {
-    apiKey: "AIzaSyAwifrnD5MbRmfSUgw14oU1CAZATiqTCBE",
-    authDomain: "validacaovivo.firebaseapp.com",
-    projectId: "validacaovivo",
-    storageBucket: "validacaovivo.appspot.com",
-    messagingSenderId: "237257354370",
-    appId: "1:237257354370:web:9709a5adba9020de6e189b",
-    measurementId: "G-XYRYGTBSE8"
-};
-
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-firebase.analytics();
-
-let db = firebase.firestore();
 let auth = firebase.auth();
 
 let defectList           = [];
@@ -95,73 +105,11 @@ let op2 = null;
 let loginIsDone = false;
 let checkLogin = setInterval(() => inicializateLoginIsDone(), 500);
 let appMetaData = null;
-let currentUserIsValidating = false;
-
-let handleListenerDefect;
-let handleListenerInstallation;
 
 function getAppMetadata() {
     db.collection('metadata').doc('appData').onSnapshot((data) => {
         appMetaData = data.data();
     })
-}
-
-function sortReqs() {
-
-    defectList.sort( (a, b) => {
-        if (a.data().StartTime < b.data().StartTime)
-            return -1;
-        else if (a.data().StartTime > b.data().StartTime)
-            return 1;
-        else
-            return 0;
-    });
-
-    installationList.sort( (a, b) => {
-        if (a.data().StartTime < b.data().StartTime)
-            return -1;
-        else if (a.data().StartTime > b.data().StartTime)
-            return 1;
-        else
-            return 0;
-    });
-
-    combinedList.sort( (a, b) => {
-        if (a.data().StartTime < b.data().StartTime)
-            return -1;
-        else if (a.data().StartTime > b.data().StartTime)
-            return 1;
-        else
-            return 0;
-    });
-}
-
-function stopLookingForChanges() {
-    handleListenerDefect();
-    handleListenerInstallation();
-}
-
-function startLookingForChanges() {
-    handleListenerDefect = db.collection(op1).onSnapshot((collection) => {
-        defectList = collection.docs;
-        combinedList = defectList.concat(installationList);
-        setCurrentUserIsValidating();
-        sortReqs();
-    })
-    
-    handleListenerInstallation = db.collection(op2).onSnapshot((collection) => {
-        installationList = collection.docs;
-        combinedList = defectList.concat(installationList);
-        setCurrentUserIsValidating();
-        sortReqs();
-    })
-}
-
-function setCurrentUserIsValidating() {
-    if (combinedList.find((request) => request.data().Validator === auth.currentUser.email && request.data().Status === 'validating'))
-        currentUserIsValidating = true;
-    else
-        currentUserIsValidating = false;
 }
 
 function isRequestValidated(id, op) {
@@ -171,50 +119,6 @@ function isRequestValidated(id, op) {
         })
     })
     
-}
-
-function openForms() {
-    var win = window.open('https://forms.office.com/Pages/ResponsePage.aspx?id=DmBElwQ-Lkm6oSXsJFxvEBIWUWZQrGNMjPmsr51iRkdUN1oxSEFTMDc3QkFFMjhJQ09DVk1RUDVDOS4u',
-                          "_blank");
-}
-
-function requestIsValidating(id,op) {
-    let now = new Date().valueOf();
-    db.collection(op).doc(id).update({
-        Status: "validating",
-        Validator: auth.currentUser.email,
-        StartValidationTime: now
-    }).then(() => {
-    }).catch(error => {
-        console.log(error);
-    })
-}
-
-function requestIsValidated(id,validator,op) {
-    if (auth.currentUser.email == validator) {
-        let now = new Date().valueOf();
-
-        db.collection(op).doc(id).update({
-            Status: "validated",
-            EndValidationTime: now
-        }).then(() => {
-        }).catch(error => {
-            console.log(error);
-        })
-    }
-}
-
-function requestIsDenied(id, reason, op) {
-    let now = new Date().valueOf();
-
-    db.collection(op).doc(id).update({
-            Reason: reason,
-            Status: 'denied',
-            EndValidationTime: now
-        }).then(() => {
-        }).catch(error => {
-            console.log(error);
-        })
 }
 
 function inicializateLoginIsDone() {

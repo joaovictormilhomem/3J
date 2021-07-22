@@ -32,26 +32,30 @@
   <div class="content">
 
     <div id="page_requests">
-      page_requests
+      <div id="page_requests_container"></div>
       <div class="add-btn" id="add-btn-requests"></div>
     </div>
   
     <div id="page_customers">
+      <div id="page_requests_container"></div>
       page_customers
       <div class="add-btn"></div>
     </div>
   
     <div id="page_stock">
+      <div id="page_stock_container"></div>
       page_stock
       <div class="add-btn"></div>
     </div>
   
     <div id="page_cash">
+      <div id="page_cash_container"></div>
       page_cash
       <div class="add-btn"></div>
     </div>
 
     <div id="page_management">
+      <div id="page_management_container"></div>
       page_management
     </div>
   </div>
@@ -74,6 +78,27 @@
 
       <label for="input-water">Água</label>
       <input type="number" id="input-water" name="input-water">
+
+      <button id="new-popup-button">Novo</button>
+
+      <button id="close-popup-button">X</button>
+    </div>
+  </div>
+
+  <div class="popup" id="new-client-popup">
+    <div class="popup-container">
+
+      <label for="input-name">Nome</label>
+      <input type="text" id="input-name" name="input-name">
+
+      <label for="input-address">Endereço</label>
+      <input type="text" id="input-address" name="input-address">
+      
+      <label for="input-phone">Telefone</label>
+      <input type="number" id="input-phone" name="input-phone">
+
+      <label for="input-birthday">Aniversário</label>
+      <input type="number" id="input-birthday" name="input-birthday">
 
       <button id="new-popup-button">Novo</button>
 
