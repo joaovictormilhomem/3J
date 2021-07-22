@@ -87,9 +87,8 @@ startLookingForChanges();
     }).catch(error => {
         console.log(error);
     })
-} */
+}
 
-/*
 let auth = firebase.auth();
 
 let defectList           = [];
