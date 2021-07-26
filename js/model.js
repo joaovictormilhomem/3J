@@ -13,6 +13,8 @@ firebase.analytics();
 
 let requestList = [];
 let requestListCopy = [];
+let p13Stock;
+let waterStock;
 
 var db = firebase.firestore();
 
@@ -21,6 +23,16 @@ var db = firebase.firestore();
 function startLookingForChanges() {
     let handleListenerRequests = db.collection('requests').onSnapshot((collection) => {
         requestList = collection.docs;
+    })
+
+    let handleListenerStock = db.collection('stock').onSnapshot((collection) => {
+        collection.docs.forEach(item => {
+            if (item.id === 'water')
+                waterStock = item.data().number;
+            else //if (item.id === 'p13')
+                p13Stock = item.data().number;
+        });
+        p13Stock
     })
 }
 
@@ -95,6 +107,15 @@ function deleteClient(id, collection) {
         status: 'deleted',
         //controller: auth.currentUser.email,
         deleteTime: now
+    }).then(() => {
+    }).catch(error => {
+        console.log(error);
+    })
+}
+
+function updateStockValue(id, collection, value) {
+    db.collection(collection).doc(id).update({
+        number: value
     }).then(() => {
     }).catch(error => {
         console.log(error);
