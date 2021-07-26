@@ -1,12 +1,11 @@
-function handleDeleteRequest() {
-    let requestElement = this.parentNode;
+function wasNotDeleted(request) { 
+    return request.data().status !== 'deleted'
+}
+
+function handleDeleteRequest(requestElement) {
     let id             = requestElement.getAttribute('data-id');
     let collection     = requestElement.getAttribute('data-collection');
     deleteRequest(id, collection);
-}
-
-function wasNotDeleted(request) { 
-    return request.data().status !== 'deleted'
 }
 
 function handleRenderRequests(requests) {
@@ -16,6 +15,12 @@ function handleRenderRequests(requests) {
 
 function handleNewRequestClick(client, address, itens) {
     createRequest(client, address, itens);  
+}
+
+function handleChangeStatusClick(requestElement) {
+    let id             = requestElement.getAttribute('data-id');
+    let collection     = requestElement.getAttribute('data-collection');
+    changeRequestStatus(id, collection);
 }
 
 let autoHandleRenderRequests = setInterval(() => {

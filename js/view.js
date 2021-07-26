@@ -17,7 +17,7 @@ const addButtons = document.getElementsByClassName('add-btn');
 
 let activePage = 1;
 
-// Navegação
+    // Navegação
 
 btnRequests.onclick = () => {
     pages.forEach(page => page.style.display = 'none');
@@ -49,7 +49,7 @@ btnManagement.onclick = () => {
     activePage = 5;
 }
 
-// Fim da navegação
+    // Show/Close
 
 function closeNewRequestPopup(){
     const newReqPopup = document.getElementById('new-request-popup');
@@ -88,12 +88,11 @@ function showNewClientPopup() {
     }
 }
 
+    // Outros
+
 function startAddButtons() {
-
     addButtons[0].onclick = () => showNewRequestPopup();
-
-    for (i = 0; i < addButtons.length; i++)
-        addButtons[i].style.display = 'block';
+    addButtons[1].onclick = () => showNewClientPopup();
 }
 
 function renderRequest(request) {
@@ -112,7 +111,7 @@ function renderRequest(request) {
 
     let newDeleteRequest       = document.createElement('p');
     newDeleteRequest.innerHTML = 'Apagar';
-    newDeleteRequest.onclick   = handleDeleteRequest;
+    newDeleteRequest.onclick   = () => {handleDeleteRequest(newRequest)};
     newDeleteRequest.classList.add('deny-request', 'text-base');
 
     let newRequestItems = document.createElement('h2');
