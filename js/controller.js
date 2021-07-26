@@ -1,3 +1,8 @@
+
+let requestListCopy = [];
+let p13StockCopy;
+let waterStockCopy;
+
 function handleDeleteRequest(requestElement) {
     let id             = requestElement.getAttribute('data-id');
     let collection     = requestElement.getAttribute('data-collection');
@@ -36,6 +41,14 @@ function start() {
             handleRenderRequests(requestList);
         }
     }, 500)
+
+    let autoRenderStock = setInterval(() => {
+        if (p13Stock !== p13StockCopy || waterStock !== waterStockCopy) {
+            waterStockCopy = waterStock;
+            p13StockCopy = p13Stock;
+            renderStock(p13Stock, waterStock);
+        }
+    }, 500);
 }
 
 start();

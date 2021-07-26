@@ -1,5 +1,43 @@
 #page_stock{
+    width: 100%;
+    height: 100%;
     padding: 10px;
-    margin-top: 20px;
     display: none;
+}
+
+#page_stock_container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.icon_container{
+    margin-top: 10%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 100px;
+}
+
+.icon{
+    background-size: auto;
+    background-repeat: no-repeat;
+    width: 150px;
+    height: 250px;
+}
+
+.icon_number{
+    font-family: Roboto;
+    font-size: 3rem;
+
+}
+
+#water_icon{
+    background-image: url('/assets/water.svg');
+}
+
+#gas_icon{
+    background-image: url('/assets/gas.svg');
 }

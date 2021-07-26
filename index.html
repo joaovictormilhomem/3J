@@ -1,118 +1,126 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset='UTF-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
   <title>3J</title>
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./css/style.css">
-  <link rel="stylesheet" href="./css/requests.css">
-  <link rel="stylesheet" href="./css/customers.css">
-  <link rel="stylesheet" href="./css/stock.css">
-  <link rel="stylesheet" href="./css/cash.css">
-  <link rel="stylesheet" href="./css/management.css">
-  <link rel="stylesheet" href="./css/popups.css">
+  <link rel='preconnect' href='https://fonts.gstatic.com'>
+  <link href='https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap' rel='stylesheet'>
+  <link rel='stylesheet' href='./css/style.css'>
+  <link rel='stylesheet' href='./css/requests.css'>
+  <link rel='stylesheet' href='./css/customers.css'>
+  <link rel='stylesheet' href='./css/stock.css'>
+  <link rel='stylesheet' href='./css/cash.css'>
+  <link rel='stylesheet' href='./css/management.css'>
+  <link rel='stylesheet' href='./css/popups.css'>
 </head>
 <body>
 
-  <div class="menu">
+  <div class='menu'>
     <nav>
       <ul>
-        <li id="btn_requests">Pedidos</li>
-        <li id="btn_customers">Clientes</li>
-        <li id="btn_stock">Estoque</li>
-        <li id="btn_cash">Caixa</li>
-        <li id="btn_management">Gerência</li>
+        <li id='btn_requests'>Pedidos</li>
+        <li id='btn_customers'>Clientes</li>
+        <li id='btn_stock'>Estoque</li>
+        <li id='btn_cash'>Caixa</li>
+        <li id='btn_management'>Gerência</li>
       </ul>
     </nav>
   </div>
 
-  <div class="content">
+  <div class='content'>
 
-    <div id="page_requests">
-      <div id="page_requests_container"></div>
-      <div class="add-btn" id="add-btn-requests"></div>
+    <div id='page_requests'>
+      <div id='page_requests_container'></div>
+      <div class='add-btn' id='add-btn-requests'></div>
     </div>
   
-    <div id="page_customers">
-      <div id="page_requests_container"></div>
+    <div id='page_customers'>
+      <div id='page_requests_container'></div>
       page_customers
-      <div class="add-btn"></div>
+      <div class='add-btn'></div>
     </div>
   
-    <div id="page_stock">
-      <div id="page_stock_container"></div>
-      page_stock
-      <div class="add-btn"></div>
+    <div id='page_stock'>
+      <div id='page_stock_container'>
+        <div class='icon_container'>
+          <div class='icon' id='gas_icon'></div>
+          <div class='icon_number' id='gas_number'></div>
+        </div>
+        <div class='icon_container'>
+          <div class='icon' id='water_icon'></div>
+          <div class='icon_number' id='water_number'></div>
+        </div>  
+      </div>
+      <div class='add-btn'></div>
     </div>
   
-    <div id="page_cash">
-      <div id="page_cash_container"></div>
+    <div id='page_cash'>
+      <div id='page_cash_container'></div>
       page_cash
-      <div class="add-btn"></div>
+      <div class='add-btn'></div>
     </div>
 
-    <div id="page_management">
-      <div id="page_management_container"></div>
+    <div id='page_management'>
+      <div id='page_management_container'></div>
       page_management
     </div>
   </div>
 
-  <div class="popup" id="new-request-popup">
-    <div class="popup-container">
+  <div class='popup' id='new-request-popup'>
+    <div class='popup-container'>
 
-      <label for="select-clients">Cliente</label>
-      <select name="select-clients" id="select-clients">
-        <option value="" selected>Sem cadastro</option>
-        <option value="João">João</option>
-        <option value="Pedro">Pedro</option>
+      <label for='select-clients'>Cliente</label>
+      <select name='select-clients' id='select-clients'>
+        <option value='' selected>Sem cadastro</option>
+        <option value='João'>João</option>
+        <option value='Pedro'>Pedro</option>
       </select>
 
-      <label for="input-address">Endereço</label>
-      <input type="text" id="input-request-address" name="input-address">
+      <label for='input-address'>Endereço</label>
+      <input type='text' id='input-request-address' name='input-address'>
       
-      <label for="input-p13">P13</label>
-      <input type="number" id="input-p13" name="input-p13">
+      <label for='input-p13'>P13</label>
+      <input type='number' id='input-p13' name='input-p13'>
 
-      <label for="input-water">Água</label>
-      <input type="number" id="input-water" name="input-water">
+      <label for='input-water'>Água</label>
+      <input type='number' id='input-water' name='input-water'>
 
-      <button id="new-popup-button">Novo</button>
+      <button id='new-popup-button'>Novo</button>
 
-      <button id="close-popup-button">X</button>
+      <button id='close-popup-button'>X</button>
     </div>
   </div>
 
-  <div class="popup" id="new-client-popup">
-    <div class="popup-container">
+  <div class='popup' id='new-client-popup'>
+    <div class='popup-container'>
 
-      <label for="input-name">Nome</label>
-      <input type="text" id="input-client-name" name="input-name">
+      <label for='input-name'>Nome</label>
+      <input type='text' id='input-client-name' name='input-name'>
 
-      <label for="input-address">Endereço</label>
-      <input type="text" id="input-client-address" name="input-address">
+      <label for='input-address'>Endereço</label>
+      <input type='text' id='input-client-address' name='input-address'>
       
-      <label for="input-phone">Telefone</label>
-      <input type="text " id="input-client-phone" name="input-phone">
+      <label for='input-phone'>Telefone</label>
+      <input type='text ' id='input-client-phone' name='input-phone'>
 
-      <label for="input-birthday">Aniversário</label>
-      <input type="number" id="input-client-birthday" name="input-birthday">
+      <label for='input-birthday'>Aniversário</label>
+      <input type='number' id='input-client-birthday' name='input-birthday'>
 
-      <button id="new-popup-button">Novo</button>
+      <button id='new-popup-button'>Novo</button>
 
-      <button id="close-popup-button">X</button>
+      <button id='close-popup-button'>X</button>
     </div>
   </div>
 
   
-  <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-analytics.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-firestore.js"></script>
+  <script src='https://www.gstatic.com/firebasejs/8.6.3/firebase-app.js'></script>
+  <script src='https://www.gstatic.com/firebasejs/8.6.3/firebase-analytics.js'></script>
+  <script src='https://www.gstatic.com/firebasejs/8.5.0/firebase-firestore.js'></script>
 
-  <script src="./js/model.js"></script>
-  <script src="./js/view.js"></script>
-  <script src="./js/controller.js"></script>
+  <script src='./js/model.js'></script>
+  <script src='./js/view.js'></script>
+  <script src='./js/controller.js'></script>
 </body>
 </html>

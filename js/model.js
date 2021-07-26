@@ -12,7 +12,6 @@ firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 
 let requestList = [];
-let requestListCopy = [];
 let p13Stock;
 let waterStock;
 

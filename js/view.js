@@ -190,3 +190,10 @@ function clearRequests() {
     pageRequestsContainer.innerHTML = '';
     startAddButtons();
 }
+
+function renderStock(p13Stock, waterStock) {
+    let gasNumberElement         = document.getElementById('gas_number');
+    let waterNumberElement       = document.getElementById('water_number');
+    gasNumberElement.innerHTML   = p13Stock;
+    waterNumberElement.innerHTML = waterStock
+}
