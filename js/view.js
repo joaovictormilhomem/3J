@@ -153,9 +153,11 @@ function renderRequest(request) {
     newRequest.classList.add('request');
     newRequest.setAttribute('data-id', request.id);
     newRequest.setAttribute('data-collection', request.ref.parent.id);
+    newRequest.setAttribute('data-status', request.data().status);
+    
 
     let newRequestStatus     = document.createElement('div');
-    newRequestStatus.onclick = () => {handleStartRequest(newRequest)};
+    newRequestStatus.ondblclick = () => {handleChangeRequestStatus(newRequest)};
     newRequestStatus.classList.add('request_status');
     newRequestStatus.classList.add('request_status_'+request.data().status);
 

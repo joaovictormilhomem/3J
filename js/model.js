@@ -62,6 +62,18 @@ function startRequest(id, collection) {
     })
 }
 
+function finishRequest(id, collection) {
+    let now = new Date().valueOf();
+    db.collection(collection).doc(id).update({
+        status: "finished",
+        //initiator: auth.currentUser.email,
+        deliveryStartTime: now
+    }).then(() => {
+    }).catch(error => {
+        console.log(error);
+    })
+}
+
 function createClient(name, address, birthday, phone) {
     let now = new Date().valueOf();
     db.collection('clients').add({
@@ -91,8 +103,8 @@ function deleteClient(id, collection) {
 
     // Logic functions
 
-function wasNotDeleted(request) { 
-    return request.data().status !== 'deleted'
+function wasNotDeletedOrFinished(request) { 
+    return request.data().status !== 'deleted' && request.data().status !== 'finished'
 }
 
 function isFilled(values) {

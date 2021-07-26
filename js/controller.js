@@ -5,7 +5,7 @@ function handleDeleteRequest(requestElement) {
 }
 
 function handleRenderRequests(requests) {
-    let requestsNotDeleted = requests.filter(wasNotDeleted);
+    let requestsNotDeleted = requests.filter(wasNotDeletedOrFinished);
     requestsNotDeleted.forEach(request => renderRequest(request));
 }
 
@@ -16,10 +16,12 @@ function handleCreateRequest(client, address, items) {
     }
 }
 
-function handleStartRequest(requestElement) {
-    let id             = requestElement.getAttribute('data-id');
-    let collection     = requestElement.getAttribute('data-collection');
-    changeRequestStatus(id, collection);
+function handleChangeRequestStatus(requestElement) {
+    let id         = requestElement.getAttribute('data-id');
+    let collection = requestElement.getAttribute('data-collection');
+    let status     = requestElement.getAttribute('data-status');
+
+    status === 'waiting' ? startRequest(id, collection) : finishRequest(id, collection);
 }
 
 function start() {
