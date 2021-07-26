@@ -58,31 +58,7 @@ function closeNewRequestPopup(){
 
 function showNewRequestPopup() {
     const newReqPopup          = document.getElementById('new-request-popup');
-    const newReqPopupContainer = newReqPopup.children[0];
-    const newButton            = newReqPopupContainer.children[8];
-    const closeButton          = newReqPopupContainer.children[9];
-    const clientElement        = newReqPopupContainer.children[1];
-    const addressElement       = newReqPopupContainer.children[3];
-    const p13Element           = newReqPopupContainer.children[5];
-    const waterElement         = newReqPopupContainer.children[7];
-
     newReqPopup.style.display = 'flex';
-    closeButton.onclick = () => closeNewRequestPopup();
-    newButton.onclick = () => {
-        let client  = clientElement.value;
-        let address = addressElement.value;
-        let items   = {p13: p13Element.value, water: waterElement.value};
-        
-        let response = handleCreateRequest(client, address, items);
-
-        if (response) {
-            closeNewRequestPopup();
-            clientElement.value = null;
-            deleteFormFields([addressElement, p13Element, waterElement]);
-        }
-        else
-            alert('preencha todos os campos corretamente');
-    }
 }
 
 function showNewClientPopup() {
@@ -109,9 +85,67 @@ function deleteFormFields(fields) {
     });
 }
 
+function startNewRequestPopup() {
+    const newReqPopup          = document.getElementById('new-request-popup');
+    const newReqPopupContainer = newReqPopup.children[0];
+    const newButton            = newReqPopupContainer.children[8];
+    const closeButton          = newReqPopupContainer.children[9];
+    const clientElement        = newReqPopupContainer.children[1];
+    const addressElement       = newReqPopupContainer.children[3];
+    const p13Element           = newReqPopupContainer.children[5];
+    const waterElement         = newReqPopupContainer.children[7];
+
+    closeButton.onclick = () => closeNewRequestPopup();
+    newButton.onclick = () => {
+        let client  = clientElement.value;
+        let address = addressElement.value;
+        let items   = {p13: p13Element.value, water: waterElement.value};
+        
+        let response = handleCreateRequest(client, address, items);
+
+        if (response) {
+            closeNewRequestPopup();
+            clientElement.value = null;
+            deleteFormFields([addressElement, p13Element, waterElement]);
+        }
+        else
+            alert('preencha todos os campos corretamente');
+    }
+}
+
 function startAddButtons() {
     addButtons[0].onclick = () => showNewRequestPopup();
     addButtons[1].onclick = () => showNewClientPopup();
+}
+
+function renderClient(client) {
+    let newClient = document.createElement('div');
+    newClient.classList.add('request');
+    newClient.setAttribute('data-id', client.id);
+    newClient.setAttribute('data-collection', client.ref.parent.id);
+
+    let newClientName       = document.createElement('h1');
+    newClientName.innerHTML = request.data().address;
+    newClientName.classList.add('request_address');
+
+    let newDeleteClient       = document.createElement('p');
+    newDeleteClient.innerHTML = 'Apagar';
+    newDeleteClient.onclick   = handleDeleteRequest;
+    newDeleteClient.classList.add('deny-request', 'text-base');
+
+    let newRequestItems = document.createElement('h2');
+    newRequestItems.classList.add('request_items');
+    if(request.data().items.p13 && request.data().items.water)
+        newRequestItems.innerHTML = request.data().items.p13+' gás P13 e '+request.data().items.water+' água';
+    else if(request.data().items.p13)
+        newRequestItems.innerHTML = request.data().items.p13+' gás P13';
+    else if(request.data().items.water)
+        newRequestItems.innerHTML = request.data().items.water+' águas';
+    
+    newRequest.appendChild(newClientName);
+    newRequest.appendChild(newDeleteClient);
+    newRequest.appendChild(newRequestItems);
+    pageRequests.appendChild(newRequest);
 }
 
 function renderRequest(request) {
@@ -155,32 +189,8 @@ function clearRequests() {
     startAddButtons();
 }
 
-function renderClient(client) {
-    let newClient = document.createElement('div');
-    newClient.classList.add('request');
-    newClient.setAttribute('data-id', client.id);
-    newClient.setAttribute('data-collection', client.ref.parent.id);
-
-    let newClientName       = document.createElement('h1');
-    newClientName.innerHTML = request.data().address;
-    newClientName.classList.add('request_address');
-
-    let newDeleteClient       = document.createElement('p');
-    newDeleteClient.innerHTML = 'Apagar';
-    newDeleteClient.onclick   = handleDeleteRequest;
-    newDeleteClient.classList.add('deny-request', 'text-base');
-
-    let newRequestItems = document.createElement('h2');
-    newRequestItems.classList.add('request_items');
-    if(request.data().items.p13 && request.data().items.water)
-        newRequestItems.innerHTML = request.data().items.p13+' gás P13 e '+request.data().items.water+' água';
-    else if(request.data().items.p13)
-        newRequestItems.innerHTML = request.data().items.p13+' gás P13';
-    else if(request.data().items.water)
-        newRequestItems.innerHTML = request.data().items.water+' águas';
-    
-    newRequest.appendChild(newClientName);
-    newRequest.appendChild(newDeleteClient);
-    newRequest.appendChild(newRequestItems);
-    pageRequests.appendChild(newRequest);
+function start() {
+    startNewRequestPopup();
 }
+
+start();
