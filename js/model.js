@@ -48,6 +48,18 @@ function deleteRequest(id, collection) {
     })
 }
 
+function startRequest(id, collection) {
+    let now = new Date().valueOf();
+    db.collection(collection).doc(id).update({
+        status: "started",
+        //initiator: auth.currentUser.email,
+        deliveryStartTime: now
+    }).then(() => {
+    }).catch(error => {
+        console.log(error);
+    })
+}
+
 function createClient(name, address, birthday, phone) {
     let now = new Date().valueOf();
     db.collection('clients').add({
@@ -76,6 +88,20 @@ function deleteClient(id, collection) {
 }
 
 startLookingForChanges();
+
+function wasNotDeleted(request) { 
+    return request.data().status !== 'deleted'
+}
+
+function isFilled(values) {
+    filled = true;
+    values.forEach(value => {
+        if (value === '' || value === null || value === undefined){
+            filled = false;
+        }
+    });
+    return filled;
+}
 
 /* function startRequest(id, collection) {
     let now = new Date().valueOf();

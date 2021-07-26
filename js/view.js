@@ -57,18 +57,31 @@ function closeNewRequestPopup(){
 }
 
 function showNewRequestPopup() {
-    const newReqPopup = document.getElementById('new-request-popup');
-    const newButton   = newReqPopup.children[0].children[8];
-    const closeButton = newReqPopup.children[0].children[9];
+    const newReqPopup          = document.getElementById('new-request-popup');
+    const newReqPopupContainer = newReqPopup.children[0];
+    const newButton            = newReqPopupContainer.children[8];
+    const closeButton          = newReqPopupContainer.children[9];
+    const clientElement        = newReqPopupContainer.children[1];
+    const addressElement       = newReqPopupContainer.children[3];
+    const p13Element           = newReqPopupContainer.children[5];
+    const waterElement         = newReqPopupContainer.children[7];
 
     newReqPopup.style.display = 'flex';
     closeButton.onclick = () => closeNewRequestPopup();
     newButton.onclick = () => {
-        let client = newReqPopup.children[0].children[1].value;
-        let address = newReqPopup.children[0].children[3].value;
-        let itens = {p13: newReqPopup.children[0].children[5].value, water: newReqPopup.children[0].children[7].value};
-        handleNewRequestClick(client, address, itens);
-        closeNewRequestPopup();
+        let client  = clientElement.value;
+        let address = addressElement.value;
+        let items   = {p13: p13Element.value, water: waterElement.value};
+        
+        let response = handleCreateRequest(client, address, items);
+
+        if (response) {
+            closeNewRequestPopup();
+            clientElement.value = null;
+            deleteFormFields([addressElement, p13Element, waterElement]);
+        }
+        else
+            alert('preencha todos os campos corretamente');
     }
 }
 
@@ -90,6 +103,12 @@ function showNewClientPopup() {
 
     // Outros
 
+function deleteFormFields(fields) {
+    fields.forEach(field => {
+        field.value = '';
+    });
+}
+
 function startAddButtons() {
     addButtons[0].onclick = () => showNewRequestPopup();
     addButtons[1].onclick = () => showNewClientPopup();
@@ -101,7 +120,8 @@ function renderRequest(request) {
     newRequest.setAttribute('data-id', request.id);
     newRequest.setAttribute('data-collection', request.ref.parent.id);
 
-    let newRequestStatus = document.createElement('div');
+    let newRequestStatus     = document.createElement('div');
+    newRequestStatus.onclick = () => {handleStartRequest(newRequest)};
     newRequestStatus.classList.add('request_status');
     newRequestStatus.classList.add('request_status_'+request.data().status);
 

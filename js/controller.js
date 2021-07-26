@@ -1,7 +1,3 @@
-function wasNotDeleted(request) { 
-    return request.data().status !== 'deleted'
-}
-
 function handleDeleteRequest(requestElement) {
     let id             = requestElement.getAttribute('data-id');
     let collection     = requestElement.getAttribute('data-collection');
@@ -13,11 +9,14 @@ function handleRenderRequests(requests) {
     requestsNotDeleted.forEach(request => renderRequest(request));
 }
 
-function handleNewRequestClick(client, address, itens) {
-    createRequest(client, address, itens);  
+function handleCreateRequest(client, address, items) {   
+    if (isFilled([address, items.p13, items.water]) && items.p13 >= 1 && items.water >= 1) {
+        createRequest(client, address, items);
+        return true;
+    }
 }
 
-function handleChangeStatusClick(requestElement) {
+function handleStartRequest(requestElement) {
     let id             = requestElement.getAttribute('data-id');
     let collection     = requestElement.getAttribute('data-collection');
     changeRequestStatus(id, collection);
