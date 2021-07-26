@@ -16,6 +16,8 @@ let requestListCopy = [];
 
 var db = firebase.firestore();
 
+    // Firebase functions
+
 function startLookingForChanges() {
     let handleListenerRequests = db.collection('requests').onSnapshot((collection) => {
         requestList = collection.docs;
@@ -87,7 +89,7 @@ function deleteClient(id, collection) {
     })
 }
 
-startLookingForChanges();
+    // Logic functions
 
 function wasNotDeleted(request) { 
     return request.data().status !== 'deleted'

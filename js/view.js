@@ -188,9 +188,3 @@ function clearRequests() {
     pageRequestsContainer.innerHTML = '';
     startAddButtons();
 }
-
-function start() {
-    startNewRequestPopup();
-}
-
-start();

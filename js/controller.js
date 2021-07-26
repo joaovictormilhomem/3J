@@ -22,12 +22,18 @@ function handleStartRequest(requestElement) {
     changeRequestStatus(id, collection);
 }
 
-let autoHandleRenderRequests = setInterval(() => {
-    if(requestListCopy !== requestList){
-        requestListCopy = requestList;
-        clearRequests();
-        handleRenderRequests(requestList);
-    }
-}, 500)
+function start() {
+    startNewRequestPopup();
+    startAddButtons();
+    startLookingForChanges();
 
-startAddButtons();
+    let autoHandleRenderRequests = setInterval(() => {
+        if(requestListCopy !== requestList){
+            requestListCopy = requestList;
+            clearRequests();
+            handleRenderRequests(requestList);
+        }
+    }, 500)
+}
+
+start();
