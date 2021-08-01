@@ -19,11 +19,17 @@ function handleRenderRequests(requests) {
 }
 
 function handleCreateRequest(client, address, items) {   
-    if (isFilled([address, items.p13, items.water]) && items.p13 >= 1 && items.water >= 1) {
-        createRequest(client, address, items);
-        handleStockUpdate(items.p13, items.water, true);
-        return true;
+    if (isFilled([address, items.p13, items.water]) && (items.p13 >= 1 || items.water >= 1)) {
+        if (p13Stock >= items.p13 && waterStock >= items.water) {
+            createRequest(client, address, items);
+            handleStockUpdate(items.p13, items.water, true);
+            return 0;
+        }
+        else
+            return 2;
     }
+    else
+        return 1;
 }
 
 function handleChangeRequestStatus(requestElement) {

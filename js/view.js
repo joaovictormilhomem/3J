@@ -103,13 +103,17 @@ function startNewRequestPopup() {
         
         let response = handleCreateRequest(client, address, items);
 
-        if (response) {
+        if (response === 0) {
             closeNewRequestPopup();
             clientElement.value = null;
             deleteFormFields([addressElement, p13Element, waterElement]);
         }
         else
-            alert('preencha todos os campos corretamente');
+            switch (response) {
+                case 1: alert('preencha todos os campos corretamente'); break;
+                case 2: alert('Não temos estoque suficiente!'); break;
+                default: break;
+            }
     }
 }
 
