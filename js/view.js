@@ -154,7 +154,8 @@ function renderRequest(request) {
     newRequest.setAttribute('data-id', request.id);
     newRequest.setAttribute('data-collection', request.ref.parent.id);
     newRequest.setAttribute('data-status', request.data().status);
-    
+    newRequest.setAttribute('data-p13', request.data().items.p13);
+    newRequest.setAttribute('data-water', request.data().items.water);
 
     let newRequestStatus     = document.createElement('div');
     newRequestStatus.ondblclick = () => {handleChangeRequestStatus(newRequest)};

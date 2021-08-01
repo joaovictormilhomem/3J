@@ -4,9 +4,13 @@ let p13StockCopy;
 let waterStockCopy;
 
 function handleDeleteRequest(requestElement) {
-    let id             = requestElement.getAttribute('data-id');
-    let collection     = requestElement.getAttribute('data-collection');
+    let id         = requestElement.getAttribute('data-id');
+    let collection = requestElement.getAttribute('data-collection');
+    let p13        = parseInt(requestElement.getAttribute('data-p13'));
+    let water      = parseInt(requestElement.getAttribute('data-water'));
+
     deleteRequest(id, collection);
+    handleStockUpdate(p13, water, false);
 }
 
 function handleRenderRequests(requests) {
@@ -17,6 +21,7 @@ function handleRenderRequests(requests) {
 function handleCreateRequest(client, address, items) {   
     if (isFilled([address, items.p13, items.water]) && items.p13 >= 1 && items.water >= 1) {
         createRequest(client, address, items);
+        handleStockUpdate(items.p13, items.water, true);
         return true;
     }
 }
@@ -27,6 +32,23 @@ function handleChangeRequestStatus(requestElement) {
     let status     = requestElement.getAttribute('data-status');
 
     status === 'waiting' ? startRequest(id, collection) : finishRequest(id, collection);
+}
+
+function handleStockUpdate(p13, water, op) {
+    if (op) {
+        if (p13 > 0)
+            updateStockValue('p13', p13Stock - p13);
+    
+        if(water > 0)
+        updateStockValue('water', waterStock - water);        
+    }
+    else{
+        if (p13 > 0)
+            updateStockValue('p13', p13Stock + p13);
+    
+        if(water > 0)
+        updateStockValue('water', waterStock + water);  
+    }
 }
 
 function start() {
