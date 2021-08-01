@@ -112,8 +112,8 @@ function deleteClient(id, collection) {
     })
 }
 
-function updateStockValue(id, collection, value) {
-    db.collection(collection).doc(id).update({
+function updateStockValue(item, value) {
+    db.collection('stock').doc(item).update({
         number: value
     }).then(() => {
     }).catch(error => {
