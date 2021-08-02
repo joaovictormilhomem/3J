@@ -59,6 +59,7 @@ function handleStockUpdate(p13, water, op) {
 
 function start() {
     startNewRequestPopup();
+    startNewClientPopup();
     startAddButtons();
     startLookingForChanges();
 

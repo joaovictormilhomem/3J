@@ -51,30 +51,35 @@ btnManagement.onclick = () => {
 
     // Show/Close
 
-function closeNewRequestPopup(){
-    const newReqPopup = document.getElementById('new-request-popup');
-    newReqPopup.style.display = 'none';
-}
-
 function showNewRequestPopup() {
-    const newReqPopup          = document.getElementById('new-request-popup');
+    const newReqPopup         = document.getElementById('new-request-popup');
     newReqPopup.style.display = 'flex';
 }
 
 function showNewClientPopup() {
-    const newReqPopup = document.getElementById('new-client-popup');
-    const newButton   = newReqPopup.children[0].children[8];
-    const closeButton = newReqPopup.children[0].children[9];
+    const newPopup = document.getElementById('new-client-popup');
+    const newButton   = newPopup.children[0].children[8];
+    const closeButton = newPopup.children[0].children[9];
 
-    newReqPopup.style.display = 'flex';
+    newPopup.style.display = 'flex';
     closeButton.onclick = () => closeNewClientPopup();
     newButton.onclick = () => {
-        let client = newReqPopup.children[0].children[1].value;
-        let address = newReqPopup.children[0].children[3].value;
-        let itens = {p13: newReqPopup.children[0].children[5].value, water: newReqPopup.children[0].children[7].value};
+        let client = newPopup.children[0].children[1].value;
+        let address = newPopup.children[0].children[3].value;
+        let itens = {p13: newPopup.children[0].children[5].value, water: newPopup.children[0].children[7].value};
         handleNewClientClick(client, address, itens);
         closeNewClientPopup();
     }
+}
+
+function closeNewRequestPopup(){
+    const newPopup = document.getElementById('new-request-popup');
+    newPopup.style.display = 'none';
+}
+
+function closeNewClientPopup(){
+    const newPopup = document.getElementById('new-client-popup');
+    newPopup.style.display = 'none';
 }
 
     // Outros
@@ -114,6 +119,21 @@ function startNewRequestPopup() {
                 case 2: alert('Não temos estoque suficiente!'); break;
                 default: break;
             }
+    }
+}
+
+function startNewClientPopup() {
+    const newPopup = document.getElementById('new-client-popup');
+    const newButton   = newPopup.children[0].children[8];
+    const closeButton = newPopup.children[0].children[9];
+
+    closeButton.onclick = () => closeNewClientPopup();
+    newButton.onclick = () => {
+        let client = newPopup.children[0].children[1].value;
+        let address = newPopup.children[0].children[3].value;
+        let itens = {p13: newPopup.children[0].children[5].value, water: newPopup.children[0].children[7].value};
+        handleNewClientClick(client, address, itens);
+        closeNewClientPopup();
     }
 }
 
