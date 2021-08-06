@@ -10,7 +10,7 @@ function handleDeleteRequest(requestElement) {
     let water      = parseInt(requestElement.getAttribute('data-water'));
 
     deleteRequest(id, collection);
-    handleStockUpdate(p13, water, false);
+    handleUpdateStock(p13, water, false);
 }
 
 function handleRenderRequests(requests) {
@@ -18,11 +18,12 @@ function handleRenderRequests(requests) {
     requestsNotDeleted.forEach(request => renderRequest(request));
 }
 
-function handleCreateRequest(client, address, items) {   
+function handleCreateRequest(client, address, items, value, op) {   
     if (isFilled([address, items.p13, items.water]) && (items.p13 >= 1 || items.water >= 1)) {
         if (p13Stock >= items.p13 && waterStock >= items.water) {
-            createRequest(client, address, items);
-            handleStockUpdate(items.p13, items.water, true);
+            createRequest(client, address, items, value, op);
+            handleUpdateStock(items.p13, items.water, true);
+            handleUpdateCash(value, op);
             return 0;
         }
         else
@@ -40,7 +41,7 @@ function handleChangeRequestStatus(requestElement) {
     status === 'waiting' ? startRequest(id, collection) : finishRequest(id, collection);
 }
 
-function handleStockUpdate(p13, water, op) {
+function handleUpdateStock(p13, water, op) {
     if (op) {
         if (p13 > 0)
             updateStockValue('p13', p13Stock - p13);
@@ -57,7 +58,15 @@ function handleStockUpdate(p13, water, op) {
     }
 }
 
+function handleUpdateCash(value, op) {
+    if (op === 0)
+        updateCashValue(atualCash.inCash + value, atualCash.forward);
+    else
+        updateCashValue(atualCash.inCash, atualCash.forward + value);
+}
+
 function start() {
+    day = getCurrentDate();
     startNewRequestPopup();
     startNewClientPopup();
     startAddButtons();

@@ -1,5 +1,5 @@
 var firebaseConfig = {
-    apiKey: "AIzaSyDq48j5uf5OWCChZp8WfsEs5-41mc7HHY4",
+    apiKey: "AIzaSyDq48j5uf5OWCChZp8WfsEs5.41mc7HHY4",
     authDomain: "jgas-94bed.firebaseapp.com",
     projectId: "jgas-94bed",
     storageBucket: "jgas-94bed.appspot.com",
@@ -14,6 +14,8 @@ firebase.analytics();
 let requestList = [];
 let p13Stock;
 let waterStock;
+let atualCash = {};
+let day;
 
 var db = firebase.firestore();
 
@@ -33,16 +35,27 @@ function startLookingForChanges() {
         });
         p13Stock
     })
+
+    let handleListenerCash = db.collection('cash').onSnapshot((collection) => {
+        collection.docs.forEach(item => {
+            if (item.id === day) {
+                atualCash.inCash = item.data().inCash;
+                atualCash.forward = item.data().forward;
+                atualCash.total = item.data().total;              
+            }
+        })
+    })
 }
 
-function createRequest(customer, address, items) {
+function createRequest(customer, address, items, value) {
     let now = new Date().valueOf();
     db.collection('requests').add({
         customer: customer,
         address: address,
         items: items,
         status: 'waiting',
-        startTime: now
+        startTime: now,
+        value: value
     }).then((doc)=>{
     }).catch(err=>{
         console.log(err);
@@ -121,6 +134,16 @@ function updateStockValue(item, value) {
     })
 }
 
+function updateCashValue(cashValue, forwardValue) {
+    db.collection('cash').doc(day).update({
+        cashValue: cashValue,
+        forwardValue: forwardValue
+    }).then(() => {
+    }).catch(error => {
+        console.log(error);
+    })
+}
+
     // Logic functions
 
 function wasNotDeletedOrFinished(request) { 
@@ -137,77 +160,7 @@ function isFilled(values) {
     return filled;
 }
 
-/* function startRequest(id, collection) {
-    let now = new Date().valueOf();
-    db.collection(collection).doc(id).update({
-        status: "started",
-        //entregador: auth.currentUser.email,
-        deliveryStartTime: now
-    }).then(() => {
-    }).catch(error => {
-        console.log(error);
-    })
+function getCurrentDate() {
+    let day = new Date;
+    return (day.getDay()+1) + '.' + (day.getMonth()+1) + '.' + day.getFullYear();
 }
-
-let auth = firebase.auth();
-
-let defectList           = [];
-let defectListCopy       = [];
-let installationList     = [];
-let installationListCopy = [];
-let combinedList         = [];
-let combinedListCopy     = [];
-
-let op1 = null;
-let op2 = null;
-
-let loginIsDone = false;
-let checkLogin = setInterval(() => inicializateLoginIsDone(), 500);
-let appMetaData = null;
-
-function getAppMetadata() {
-    db.collection('metadata').doc('appData').onSnapshot((data) => {
-        appMetaData = data.data();
-    })
-}
-
-function isRequestValidated(id, op) {
-    return new Promise(resolve => {
-        db.collection(op).doc(id).get().then((request) => {
-            resolve(request.data().Status);
-        })
-    })
-    
-}
-
-function inicializateLoginIsDone() {
-    if (auth.currentUser) {
-        if (auth.currentUser.email !== null) {
-            loginIsDone = true;
-        }
-        clearInterval(checkLogin);
-    }
-}
-
-function login(email,password) {
-    auth.signInWithEmailAndPassword(email, password)
-        .then((user) => {
-            inicializateLoginIsDone();
-        })
-        .catch((error) => {
-            console.log(error);
-            loginIsDone = false;
-        });
-}
-
-function logout() {
-    auth.signOut()
-        .then(() => {
-           loginIsDone = false;
-        })
-        .catch(error => {
-            console.log(error);
-        })
-}
-
-*/
