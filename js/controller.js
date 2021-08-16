@@ -1,4 +1,3 @@
-
 let requestListCopy = [];
 let p13StockCopy;
 let waterStockCopy;

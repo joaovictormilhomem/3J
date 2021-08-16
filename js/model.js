@@ -6,7 +6,7 @@ var firebaseConfig = {
     messagingSenderId: "606477017238",
     appId: "1:606477017238:web:7c7d54667db0fe146ce2b7",
     measurementId: "G-2STVC1E1DG"
-  };
+};
 
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
@@ -38,7 +38,6 @@ function startLookingForChanges() {
 
     let handleListenerCash = db.collection('cash').onSnapshot((collection) => {
         collection.docs.forEach(item => {
-            console.log(item.data());
             if (item.id === day) {
                 atualCash.inCash = item.data().cashValue;
                 atualCash.forward = item.data().forwardValue;
