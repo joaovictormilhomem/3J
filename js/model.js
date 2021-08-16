@@ -38,10 +38,11 @@ function startLookingForChanges() {
 
     let handleListenerCash = db.collection('cash').onSnapshot((collection) => {
         collection.docs.forEach(item => {
+            console.log(item.data());
             if (item.id === day) {
-                atualCash.inCash = item.data().inCash;
-                atualCash.forward = item.data().forward;
-                atualCash.total = item.data().total;              
+                atualCash.inCash = item.data().cashValue;
+                atualCash.forward = item.data().forwardValue;
+                atualCash.total = atualCash.inCash + atualCash.forward;
             }
         })
     })
@@ -135,7 +136,8 @@ function updateStockValue(item, value) {
 }
 
 function updateCashValue(cashValue, forwardValue) {
-    db.collection('cash').doc(day).update({
+    console.log(day, cashValue, forwardValue);
+    db.collection('cash').doc(day).set({
         cashValue: cashValue,
         forwardValue: forwardValue
     }).then(() => {
@@ -162,5 +164,5 @@ function isFilled(values) {
 
 function getCurrentDate() {
     let day = new Date;
-    return (day.getDay()+1) + '.' + (day.getMonth()+1) + '.' + day.getFullYear();
+    return (day.getDay()+1) + '-' + (day.getMonth()+1) + '-' + day.getFullYear();
 }

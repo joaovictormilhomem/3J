@@ -23,7 +23,6 @@ function handleCreateRequest(client, address, items, value, op) {
         if (p13Stock >= items.p13 && waterStock >= items.water) {
             createRequest(client, address, items, value, op);
             handleUpdateStock(items.p13, items.water, true);
-            handleUpdateCash(value, op);
             return 0;
         }
         else
@@ -37,8 +36,15 @@ function handleChangeRequestStatus(requestElement) {
     let id         = requestElement.getAttribute('data-id');
     let collection = requestElement.getAttribute('data-collection');
     let status     = requestElement.getAttribute('data-status');
+    let value      = parseInt(requestElement.getAttribute('data-value'));
+    let op = 0   //= requestElement.getAttribute('data-cashOp');
 
-    status === 'waiting' ? startRequest(id, collection) : finishRequest(id, collection);
+    if (status === 'waiting')
+        startRequest(id, collection);
+    else{
+        handleUpdateCash(value, op);
+        finishRequest(id, collection);
+    }
 }
 
 function handleUpdateStock(p13, water, op) {
@@ -59,10 +65,18 @@ function handleUpdateStock(p13, water, op) {
 }
 
 function handleUpdateCash(value, op) {
-    if (op === 0)
-        updateCashValue(atualCash.inCash + value, atualCash.forward);
-    else
-        updateCashValue(atualCash.inCash, atualCash.forward + value);
+    if (atualCash.inCash === undefined) {
+        if (op === 0)
+            updateCashValue(0 + value, 0);
+        else
+            updateCashValue(0, 0 + value);
+    }
+    else{
+        if (op === 0)
+            updateCashValue(atualCash.inCash + value, atualCash.forward);
+        else
+            updateCashValue(atualCash.inCash, atualCash.forward + value);
+    }
 }
 
 function start() {

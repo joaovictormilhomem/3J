@@ -182,6 +182,7 @@ function renderRequest(request) {
     newRequest.setAttribute('data-status', request.data().status);
     newRequest.setAttribute('data-p13', request.data().items.p13);
     newRequest.setAttribute('data-water', request.data().items.water);
+    newRequest.setAttribute('data-value', request.data().value);
 
     let newRequestStatus     = document.createElement('div');
     newRequestStatus.ondblclick = () => {handleChangeRequestStatus(newRequest)};
