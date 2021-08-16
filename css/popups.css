@@ -72,15 +72,15 @@
     transition: 0.5s;
 }
 
-#close-popup-button{
+.close-popup-button{
     position: absolute;
     top: 10px;
-    right: 10px;
+    right: 10px !important;
 
-    width: 40px;
-    height: fit-content;
+    width: 40px !important;
+    height: fit-content !important;
 
-    font-family: cursive;
+    font-family: cursive !important;
 
-    background-color: transparent;
+    background-color: transparent !important;
 }

@@ -57,9 +57,9 @@ function showNewRequestPopup() {
 }
 
 function showNewClientPopup() {
-    const newPopup = document.getElementById('new-client-popup');
-    const newButton   = newPopup.children[0].children[8];
-    const closeButton = newPopup.children[0].children[9];
+    const newPopup    = document.getElementById('new-client-popup');
+    const newButton   = document.getElementById('new-popup-button-client');
+    const closeButton = document.getElementById('close-popup-button-client');
 
     newPopup.style.display = 'flex';
     closeButton.onclick = () => closeNewClientPopup();
@@ -93,25 +93,27 @@ function deleteFormFields(fields) {
 function startNewRequestPopup() {
     const newReqPopup          = document.getElementById('new-request-popup');
     const newReqPopupContainer = newReqPopup.children[0];
-    const newButton            = newReqPopupContainer.children[8];
-    const closeButton          = newReqPopupContainer.children[9];
-    const clientElement        = newReqPopupContainer.children[1];
-    const addressElement       = newReqPopupContainer.children[3];
-    const p13Element           = newReqPopupContainer.children[5];
-    const waterElement         = newReqPopupContainer.children[7];
+    const newButton            = document.getElementById('new-popup-button-request');
+    const closeButton          = document.getElementById('close-popup-button-request');
+    const clientElement        = document.getElementById('select-clients');
+    const addressElement       = document.getElementById('input-request-address');
+    const p13Element           = document.getElementById('input-p13');
+    const waterElement         = document.getElementById('input-water');
+    const valueElement         = document.getElementById('input-value');
 
     closeButton.onclick = () => closeNewRequestPopup();
     newButton.onclick = () => {
         let client  = clientElement.value;
         let address = addressElement.value;
         let items   = {p13: p13Element.value, water: waterElement.value};
+        let value   = valueElement.value;
         
-        let response = handleCreateRequest(client, address, items);
+        let response = handleCreateRequest(client, address, items, value);
 
         if (response === 0) {
             closeNewRequestPopup();
             clientElement.value = null;
-            deleteFormFields([addressElement, p13Element, waterElement]);
+            deleteFormFields([addressElement, p13Element, waterElement, valueElement]);
         }
         else
             switch (response) {
