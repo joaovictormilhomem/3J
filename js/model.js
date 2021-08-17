@@ -163,5 +163,5 @@ function isFilled(values) {
 
 function getCurrentDate() {
     let day = new Date;
-    return (day.getDay()+1) + '-' + (day.getMonth()+1) + '-' + day.getFullYear();
+    return (day.getDate()) + '-' + (day.getMonth()+1) + '-' + day.getFullYear();
 }
