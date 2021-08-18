@@ -73,7 +73,13 @@ function showNewClientPopup() {
 }
 
 function closeNewRequestPopup(){
-    const newPopup = document.getElementById('new-request-popup');
+    const addressElement = document.getElementById('input-request-address');
+    const p13Element     = document.getElementById('input-p13');
+    const waterElement   = document.getElementById('input-water');
+    const valueElement   = document.getElementById('input-value');
+    const opElement      = document.getElementById('input-op');
+    const newPopup       = document.getElementById('new-request-popup');
+    deleteFormFields([addressElement, p13Element, waterElement, valueElement, opElement]);
     newPopup.style.display = 'none';
 }
 
@@ -87,6 +93,7 @@ function closeNewClientPopup(){
 function deleteFormFields(fields) {
     fields.forEach(field => {
         field.value = '';
+        field.checked = false;
     });
 }
 
@@ -100,6 +107,7 @@ function startNewRequestPopup() {
     const p13Element           = document.getElementById('input-p13');
     const waterElement         = document.getElementById('input-water');
     const valueElement         = document.getElementById('input-value');
+    const opElement            = document.getElementById('input-op');
 
     closeButton.onclick = () => closeNewRequestPopup();
     newButton.onclick = () => {
@@ -107,13 +115,14 @@ function startNewRequestPopup() {
         let address = addressElement.value;
         let items   = {p13: p13Element.value, water: waterElement.value};
         let value   = valueElement.value;
+        let op      = opElement.checked;
         
-        let response = handleCreateRequest(client, address, items, value);
+        let response = handleCreateRequest(client, address, items, value, op);
 
         if (response === 0) {
             closeNewRequestPopup();
             clientElement.value = null;
-            deleteFormFields([addressElement, p13Element, waterElement, valueElement]);
+            deleteFormFields([addressElement, p13Element, waterElement, valueElement, opElement]);
         }
         else
             switch (response) {
@@ -183,6 +192,7 @@ function renderRequest(request) {
     newRequest.setAttribute('data-p13', request.data().items.p13);
     newRequest.setAttribute('data-water', request.data().items.water);
     newRequest.setAttribute('data-value', request.data().value);
+    newRequest.setAttribute('data-cashOp', request.data().op);
 
     let newRequestStatus     = document.createElement('div');
     newRequestStatus.ondblclick = () => {handleChangeRequestStatus(newRequest)};

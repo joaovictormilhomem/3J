@@ -47,7 +47,7 @@ function startLookingForChanges() {
     })
 }
 
-function createRequest(customer, address, items, value) {
+function createRequest(customer, address, items, value, op) {
     let now = new Date().valueOf();
     db.collection('requests').add({
         customer: customer,
@@ -55,7 +55,8 @@ function createRequest(customer, address, items, value) {
         items: items,
         status: 'waiting',
         startTime: now,
-        value: value
+        value: value,
+        op: op
     }).then((doc)=>{
     }).catch(err=>{
         console.log(err);
