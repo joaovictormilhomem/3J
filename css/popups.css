@@ -19,7 +19,7 @@
 
 .popup-container{
     width: 700px;
-    height: 700px;
+    height: 550px;
     
     background-color: #4A69BD;
     color: white;
@@ -49,6 +49,20 @@
 
 .popup input[type=number]{
     width: 100px;
+}
+
+.horizontal-inputs{
+    margin: 20px 0px;
+}
+
+.horizontal-inputs input{
+    margin-right: 10px;
+}
+
+.popup input[type=checkbox]{
+    width: 30px;
+    height: 30px;
+    margin-bottom: 0px;
 }
 
 .popup button{
