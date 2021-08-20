@@ -1,6 +1,7 @@
 let requestListCopy = [];
 let p13StockCopy;
 let waterStockCopy;
+let atualCashCopy = {};
 
 function handleDeleteRequest(requestElement) {
     let id         = requestElement.getAttribute('data-id');
@@ -64,7 +65,6 @@ function handleUpdateStock(p13, water, op) {
 }
 
 function handleUpdateCash(value, op) {
-    console.log(op);
     if(atualCash.inCash === undefined) {
         if(op == 'true')
             updateCashValue(0, 0 + value);
@@ -94,11 +94,20 @@ function start() {
         }
     }, 500)
 
+    let autoRenderCash = setInterval(() => {
+        if (atualCash !== atualCashCopy) {
+            atualCashCopy.forward = atualCash.forward;
+            atualCashCopy.inCash = atualCash.inCash;
+            atualCashCopy.total = atualCash.total;
+            renderCash(atualCashCopy);
+        }
+    }, 500);
+
     let autoRenderStock = setInterval(() => {
         if (p13Stock !== p13StockCopy || waterStock !== waterStockCopy) {
             waterStockCopy = waterStock;
             p13StockCopy = p13Stock;
-            renderStock(p13Stock, waterStock);
+            renderStock(p13StockCopy, waterStockCopy);
         }
     }, 500);
 }

@@ -235,3 +235,10 @@ function renderStock(p13Stock, waterStock) {
     gasNumberElement.innerHTML   = p13Stock;
     waterNumberElement.innerHTML = waterStock
 }
+
+function renderCash(atualCash) {
+    let moneyNumberElement         = document.getElementById('money_number');
+    let forwardNumberElement       = document.getElementById('forward_number');
+    moneyNumberElement.innerHTML   = atualCash.inCash;
+    forwardNumberElement.innerHTML = atualCash.forward;
+}

@@ -136,7 +136,6 @@ function updateStockValue(item, value) {
 }
 
 function updateCashValue(cashValue, forwardValue) {
-    console.log(day, cashValue, forwardValue);
     db.collection('cash').doc(day).set({
         cashValue: cashValue,
         forwardValue: forwardValue
