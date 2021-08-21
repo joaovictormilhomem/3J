@@ -137,10 +137,13 @@ body{
         min-height: 100vh;
         align-items: flex-start;
         padding-top: 20px;
-        font-size: 4rem;
+        font-size: 2rem;
     }
     
     .menu li{
+        width: 100px;
+        overflow: hidden;
+        content: none;
     }
 
     .content{
