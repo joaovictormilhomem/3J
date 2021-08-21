@@ -217,6 +217,8 @@ function renderRequest(request) {
     else if(request.data().items.water)
         newRequestItems.innerHTML = request.data().items.water+' águas';
     
+    newRequestItems.innerHTML = newRequestItems.innerHTML+' por R$ '+request.data().value+',00';
+    
     newRequest.appendChild(newRequestStatus);
     newRequest.appendChild(newRequestAddress);
     newRequest.appendChild(newDeleteRequest);
