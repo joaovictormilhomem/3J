@@ -150,7 +150,7 @@ function startNewClientPopup() {
 
 function startAddButtons() {
     addButtons[0].onclick = () => showNewRequestPopup();
-    addButtons[1].onclick = () => showNewClientPopup();
+    //addButtons[1].onclick = () => showNewClientPopup();
 }
 
 function renderClient(client) {
