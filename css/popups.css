@@ -19,7 +19,7 @@
 
 .popup-container{
     width: 700px;
-    height: 550px;
+    height: fit-content;
     
     background-color: #4A69BD;
     color: white;
@@ -52,38 +52,33 @@
 }
 
 .horizontal-inputs{
-    margin: 20px 0px;
+    margin-top: 20px;
 }
 
 .horizontal-inputs input{
     margin-right: 10px;
 }
 
-.popup input[type=checkbox]{
-    width: 30px;
-    height: 30px;
-    margin-bottom: 0px;
-}
+/* #input-op{
+    width: 200px;
+} */
 
 .popup button{
-    width: 200px;
-    height: 60px;
-
+    padding: 10px 30px;
+    border: none;
+    border-radius: var(--border-radius-popup);
+    cursor: pointer;
+    
     font-family: Roboto, sans-serif;
     font-size: 2rem;
 
-    position: absolute;
-    bottom: 40px;
-    right: 40px;
+    align-self: flex-end;
 
-    border-radius: var(--border-radius-popup);
-    border: none;
-    cursor: pointer;
 }
 .popup button:hover{
     background-color: #ffffff;
     color: rgb(58, 58, 58);
-    transition: 0.5s;
+    transition: 0.15s;
 }
 
 .close-popup-button{

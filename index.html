@@ -112,10 +112,13 @@
         <input type='number' id='input-value' name='input-value'>
       </div>
 
-      <div>
-        <label for="input-op">Pagamento a prazo</label>
-        <input type="checkbox" name="input-op" id="input-op">
-      </div>
+      <label for="input-op">Pagamento</label>
+      <select name="input-op" id="input-op">
+        <option value="cash">A vista</option>
+        <option value="card">Cartão</option>
+        <option value="pix">PIX</option>
+        <option value="forward">A prazo</option>
+      </select>
 
       <button id='new-popup-button-request'>Novo</button>
 
