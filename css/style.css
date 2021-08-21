@@ -63,27 +63,6 @@ body{
     display: block;
 }
 
-.icon_container{
-    margin-top: 10%;
-    height: fit-content;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 100px;
-}
-
-.icon{
-    background-size: auto;
-    background-repeat: no-repeat;
-    width: 150px;
-    height: 250px;
-}
-
-.icon_number{
-    font-family: Roboto;
-    font-size: 3rem;
-}
-
 @keyframes show{
     from{
         transform: translateX(10px);
