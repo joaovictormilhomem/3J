@@ -1,3 +1,7 @@
+:root {
+    --menu-size: 350px;
+}
+
 *{
     margin: 0;
     padding: 0;
@@ -16,7 +20,7 @@ body{
 }
 
 .menu{
-    width: 350px;
+    width: var(--menu-size);
     height: 100vh;
     background-color: #4A69BD;
 
@@ -41,7 +45,7 @@ body{
 }
 
 .content{
-    width: calc(100vw - 350px);
+    width: calc(100vw - var(--menu-size));
     height: 100vh;
     background-color: #ADC2D1;
 }
@@ -118,5 +122,29 @@ body{
 
     .op{
         width: 400px;
+    }
+}
+
+@media (max-width: 786px) {
+    :root{
+        --menu-size: 100px;
+    }
+    body{
+        background-color: #4A69BD;
+    }
+    .menu{
+        width: 100px;
+        min-height: 100vh;
+        align-items: flex-start;
+        padding-top: 20px;
+        font-size: 4rem;
+    }
+    
+    .menu li{
+    }
+
+    .content{
+        min-height: 100vh;
+        height: 100%;
     }
 }
