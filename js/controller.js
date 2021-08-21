@@ -19,7 +19,7 @@ function handleRenderRequests(requests) {
 }
 
 function handleCreateRequest(client, address, items, value, op) {   
-    if(isFilled([address, items.p13, items.water]) && (items.p13 >= 1 || items.water >= 1)) {
+    if(isFilled([address, items.p13, items.water, value]) && (items.p13 >= 1 || items.water >= 1)) {
         if(p13Stock >= items.p13 && waterStock >= items.water) {
             createRequest(client, address, items, value, op);
             handleUpdateStock(items.p13, items.water, true);
