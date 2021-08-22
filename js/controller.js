@@ -78,6 +78,7 @@ function start() {
     startNewClientPopup();
     startAddButtons();
     startLookingForChanges();
+    checkUndefinedCash();
 
     let autoHandleRenderRequests = setInterval(() => {
         if(requestListCopy !== requestList){

@@ -45,6 +45,7 @@ function startLookingForChanges() {
                 atualCash.forward = item.data().forward;
                 atualCash.total = atualCash.incash + atualCash.card + atualCash.pix + atualCash.forward;
             }
+            checkUndefinedCash();
         })
     })
 }
@@ -173,7 +174,7 @@ function getCurrentDate() {
 }
 
 function checkUndefinedCash() {
-    keys = ['incash', 'card', 'pix', 'forward'];
+    keys = ['incash', 'card', 'pix', 'forward', 'total'];
 
     keys.forEach(key => {
         if(atualCash[key] === undefined)
