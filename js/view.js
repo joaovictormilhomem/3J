@@ -245,9 +245,9 @@ function renderCash(atualCash) {
     let forwardNumberElement = document.getElementById('forward_number');
     let totalNumberElement   = document.getElementById('total_number');
     
-    moneyNumberElement.innerHTML   = atualCash.incash;
-    cardNumberElement.innerHTML    = atualCash.card;
-    pixNumberElement.innerHTML     = atualCash.pix;
-    forwardNumberElement.innerHTML = atualCash.forward;
-    totalNumberElement.innerHTML   = atualCash.total;
+    moneyNumberElement.innerHTML   = 'R$ ' + atualCash.incash + ',00';
+    cardNumberElement.innerHTML    = 'R$ ' + atualCash.card + ',00';
+    pixNumberElement.innerHTML     = 'R$ ' + atualCash.pix + ',00';
+    forwardNumberElement.innerHTML = 'R$ ' + atualCash.forward + ',00';
+    totalNumberElement.innerHTML   = 'R$ ' + atualCash.total + ',00';
 }
