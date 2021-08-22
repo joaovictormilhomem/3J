@@ -115,7 +115,7 @@ function startNewRequestPopup() {
         let address = addressElement.value;
         let items   = {p13: p13Element.value, water: waterElement.value};
         let value   = valueElement.value;
-        let op      = opElement.checked;
+        let op      = opElement.value;
         
         let response = handleCreateRequest(client, address, items, value, op);
 
@@ -239,8 +239,15 @@ function renderStock(p13Stock, waterStock) {
 }
 
 function renderCash(atualCash) {
-    let moneyNumberElement         = document.getElementById('money_number');
-    let forwardNumberElement       = document.getElementById('forward_number');
+    let moneyNumberElement   = document.getElementById('money_number');
+    let cardNumberElement    = document.getElementById('card_number');
+    let pixNumberElement     = document.getElementById('pix_number');
+    let forwardNumberElement = document.getElementById('forward_number');
+    let totalNumberElement   = document.getElementById('total_number');
+    
     moneyNumberElement.innerHTML   = atualCash.inCash;
+    cardNumberElement.innerHTML    = atualCash.card;
+    pixNumberElement.innerHTML     = atualCash.pix;
     forwardNumberElement.innerHTML = atualCash.forward;
+    totalNumberElement.innerHTML   = atualCash.total;
 }
