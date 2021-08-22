@@ -39,9 +39,11 @@ function startLookingForChanges() {
     let handleListenerCash = db.collection('cash').onSnapshot((collection) => {
         collection.docs.forEach(item => {
             if (item.id === day) {
-                atualCash.inCash = item.data().cashValue;
-                atualCash.forward = item.data().forwardValue;
-                atualCash.total = atualCash.inCash + atualCash.forward;
+                atualCash.incash = item.data().incash;
+                atualCash.card = item.data().card;
+                atualCash.pix = item.data().pix;
+                atualCash.forward = item.data().forward;
+                atualCash.total = atualCash.incash + atualCash.card + atualCash.pix + atualCash.forward;
             }
         })
     })
@@ -135,10 +137,14 @@ function updateStockValue(item, value) {
     })
 }
 
-function updateCashValue(cashValue, forwardValue) {
+function updateCashValue() {
+    checkUndefinedCash();
+    console.log(atualCash);
     db.collection('cash').doc(day).set({
-        cashValue: cashValue,
-        forwardValue: forwardValue
+        incash: atualCash.incash,
+        card: atualCash.card,
+        pix: atualCash.pix,
+        forward: atualCash.forward
     }).then(() => {
     }).catch(error => {
         console.log(error);
@@ -164,4 +170,13 @@ function isFilled(values) {
 function getCurrentDate() {
     let day = new Date;
     return (day.getDate()) + '-' + (day.getMonth()+1) + '-' + day.getFullYear();
+}
+
+function checkUndefinedCash() {
+    keys = ['incash', 'card', 'pix', 'forward'];
+
+    keys.forEach(key => {
+        if(atualCash[key] === undefined)
+            atualCash[key] = 0;
+    });
 }

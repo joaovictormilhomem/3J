@@ -65,18 +65,11 @@ function handleUpdateStock(p13, water, op) {
 }
 
 function handleUpdateCash(value, op) {
-    if(atualCash.inCash === undefined) {
-        if(op == 'true')
-            updateCashValue(0, 0 + value);
-        else
-            updateCashValue(0 + value, 0);
-    }
-    else{
-        if(op == 'true')
-            updateCashValue(atualCash.inCash, atualCash.forward + value);
-        else
-            updateCashValue(atualCash.inCash + value, atualCash.forward);
-    }
+    if (atualCash[op] !== undefined)
+        atualCash[op] = atualCash[op] + value;
+    else
+        atualCash[op] = value;
+    updateCashValue();
 }
 
 function start() {
@@ -96,9 +89,11 @@ function start() {
 
     let autoRenderCash = setInterval(() => {
         if (atualCash !== atualCashCopy) {
+            atualCashCopy.incash  = atualCash.incash;
+            atualCashCopy.card    = atualCash.card;
+            atualCashCopy.pix     = atualCash.pix;
             atualCashCopy.forward = atualCash.forward;
-            atualCashCopy.inCash = atualCash.inCash;
-            atualCashCopy.total = atualCash.total;
+            atualCashCopy.total   = atualCash.total;
             renderCash(atualCashCopy);
         }
     }, 500);

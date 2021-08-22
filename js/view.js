@@ -245,7 +245,7 @@ function renderCash(atualCash) {
     let forwardNumberElement = document.getElementById('forward_number');
     let totalNumberElement   = document.getElementById('total_number');
     
-    moneyNumberElement.innerHTML   = atualCash.inCash;
+    moneyNumberElement.innerHTML   = atualCash.incash;
     cardNumberElement.innerHTML    = atualCash.card;
     pixNumberElement.innerHTML     = atualCash.pix;
     forwardNumberElement.innerHTML = atualCash.forward;
