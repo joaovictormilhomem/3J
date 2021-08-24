@@ -196,6 +196,8 @@ function renderRequest(request) {
     newRequest.setAttribute('data-water', request.data().items.water);
     newRequest.setAttribute('data-value', request.data().value);
     newRequest.setAttribute('data-cash-op', request.data().op);
+    newRequest.setAttribute('data-telephone', request.data().telephone);
+    newRequest.setAttribute('title', request.data().op);
 
     let newRequestStatus     = document.createElement('div');
     newRequestStatus.ondblclick = () => {handleChangeRequestStatus(newRequest)};
