@@ -43,7 +43,7 @@ function startLookingForChanges() {
                 atualCash.card = item.data().card;
                 atualCash.pix = item.data().pix;
                 atualCash.forward = item.data().forward;
-                atualCash.total = atualCash.incash + atualCash.card + atualCash.pix + atualCash.forward;
+                atualCash.total = atualCash.incash + atualCash.card + atualCash.pix;
             }
             checkUndefinedCash();
         })
