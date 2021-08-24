@@ -1,13 +1,16 @@
 const pageRequests   = document.getElementById('page_requests');
+const pageForwards   = document.getElementById('page_forwards');
 const pageCustomers  = document.getElementById('page_customers');
 const pageStock      = document.getElementById('page_stock');
 const pageCash       = document.getElementById('page_cash');
 const pageManagement = document.getElementById('page_management');
-const pages          = [pageRequests, pageCustomers, pageStock, pageCash, pageManagement];
+const pages          = [pageRequests, pageForwards, pageCustomers, pageStock, pageCash, pageManagement];
 
-let pageRequestsContainer = document.getElementById('page_requests_container');
+const pageRequestsContainer = document.getElementById('page_requests_container');
+const pageForwardsContainer = document.getElementById('page_forwards_container');
 
 const btnRequests   = document.getElementById('btn_requests');
+const btnForwards   = document.getElementById('btn_forwards');
 const btnCustomers  = document.getElementById('btn_customers');
 const btnStock      = document.getElementById('btn_stock');
 const btnCash       = document.getElementById('btn_cash');
@@ -23,6 +26,11 @@ btnRequests.onclick = () => {
     pages.forEach(page => page.style.display = 'none');
     pageRequests.style.display = 'block';
     activePage = 1;
+}
+
+btnForwards.onclick = () => {
+    pages.forEach(page => page.style.display = 'none');
+    pageForwards.style.display = 'block';
 }
 
 btnCustomers.onclick = () => {

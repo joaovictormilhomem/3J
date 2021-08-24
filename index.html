@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang='en'>
+
 <head>
   <meta charset='UTF-8'>
   <meta http-equiv='X-UA-Compatible' content='IE=edge'>
@@ -16,6 +17,7 @@
   <link rel='stylesheet' href='./css/popups.css'>
   <link rel="stylesheet" href="./css/forwards.css">
 </head>
+
 <body>
 
   <div class='menu'>
@@ -39,16 +41,31 @@
     </div>
 
     <div id='page_forwards'>
-      page_forwards
-      <div id='page_forwards_container'></div>
+      <div id='page_forwards_container'>
+
+        <div class="forward" data-id="bowVqdkWtDZAnBEqyyMf" data-collection="requests" data-value="1" data-cash-op="incash" data-telephone="984952545" title="984952545">
+          <h1 class="forward_address">Quadra 307 Sul, Rua 02, Lote 12, QI 15</h1>
+          <h1 class="forward_telephone">63984928346</h1>
+          <p class="action_forward text-base">Pagar</p>
+          <h2 class="forward_items">R$ 112,00</h2>
+        </div>
+
+        <div class="forward" data-id="bowVqdkWtDZAnBEqyyMf" data-collection="requests" data-value="1" data-cash-op="incash" data-telephone="984952545" title="984952545">
+          <h1 class="forward_address">Quadra 307 Sul, Rua 02, Lote 12, QI 15</h1>
+          <h1 class="forward_telephone">63984928346</h1>
+          <p class="action_forward text-base">Pagar</p>
+          <h2 class="forward_items">R$ 112,00</h2>
+        </div>
+
+      </div>
     </div>
-  
+
     <div id='page_customers'>
       <div id='page_customers_container'></div>
       page_customers
       <!-- <div class='add-btn'></div> -->
     </div>
-  
+
     <div id='page_stock'>
       <div id='page_stock_container'>
         <div class='icon_container'>
@@ -58,11 +75,11 @@
         <div class='icon_container'>
           <div class='icon' id='water_icon'></div>
           <div class='icon_number' id='water_number'></div>
-        </div>  
+        </div>
       </div>
       <!-- <div class='add-btn'></div> -->
     </div>
-  
+
     <div id='page_cash'>
       <div id='page_cash_container'>
         <div class='icon_container_cash'>
@@ -85,7 +102,7 @@
           <img src="./assets/total.svg" alt="valor total" class='cash_icon' id='total_icon' title="valor total">
           <div class='icon_number' id='total_number'></div>
         </div>
-      </div> 
+      </div>
       <!-- <div class='add-btn'></div> -->
     </div>
 
@@ -110,7 +127,7 @@
 
       <label for='input-telephone'>Telefone</label>
       <input type='text' id='input-request-telephone' name='input-telephone'>
-      
+
       <div class="horizontal-inputs">
         <label for='input-p13'>P13</label>
         <input type='number' id='input-p13' name='input-p13'>
@@ -144,7 +161,7 @@
 
       <label for='input-address'>Endereço</label>
       <input type='text' id='input-client-address' name='input-address'>
-      
+
       <label for='input-phone'>Telefone</label>
       <input type='text ' id='input-client-phone' name='input-phone'>
 
@@ -153,11 +170,11 @@
 
       <button id='new-popup-button-client'>Novo</button>
 
-      <button id='close-popup-button-client'  class="close-popup-button">X</button>
+      <button id='close-popup-button-client' class="close-popup-button">X</button>
     </div>
   </div>
 
-  
+
   <script src='https://www.gstatic.com/firebasejs/8.6.3/firebase-app.js'></script>
   <script src='https://www.gstatic.com/firebasejs/8.6.3/firebase-analytics.js'></script>
   <script src='https://www.gstatic.com/firebasejs/8.5.0/firebase-firestore.js'></script>
@@ -166,4 +183,5 @@
   <script src='./js/view.js'></script>
   <script src='./js/controller.js'></script>
 </body>
+
 </html>
