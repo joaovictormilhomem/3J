@@ -34,7 +34,7 @@
     bottom: 10px;
 }
 
-.action_forward{
+.pay_forward{
     background-color: rgba(0, 0, 0, 0.2);
     padding: 10px;
     border-radius: 10px;
@@ -45,6 +45,6 @@
     right: 5px;
     top: 5px;
 }
-.action_forward:hover{
+.pay_forward:hover{
     background-color: rgba(255, 0, 0, 0.5);
 }

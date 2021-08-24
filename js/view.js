@@ -244,6 +244,50 @@ function clearRequests() {
     startAddButtons();
 }
 
+function renderForward(forward) {
+    let newForward = document.createElement('div');
+    newForward.classList.add('forward');
+    newForward.setAttribute('data-id', forward.id);
+    newForward.setAttribute('data-collection', forward.ref.parent.id);
+    newForward.setAttribute('data-status', forward.data().status);
+    newForward.setAttribute('data-p13', forward.data().items.p13);
+    newForward.setAttribute('data-water', forward.data().items.water);
+    newForward.setAttribute('data-value', forward.data().value);
+    newForward.setAttribute('data-cash-op', forward.data().op);
+    newForward.setAttribute('data-telephone', forward.data().telephone);
+    newForward.setAttribute('title', forward.data().op);
+
+    let newForwardAddress       = document.createElement('h1');
+    newForwardAddress.innerHTML = forward.data().address;
+    newForwardAddress.classList.add('request_address');
+
+    let newForwardTelephone       = document.createElement('h1');
+    newForwardTelephone.innerHTML = forward.data().telephone;
+    newForwardTelephone.classList.add('forward_telephone');
+
+    let newPayForward       = document.createElement('p');
+    newPayForward.innerHTML = 'Pagar';
+    newPayForward.onclick   = () => {handlePayForward(newForward)};
+    newPayForward.classList.add('pay_forward', 'text-base');
+
+    let newForwardNotes = document.createElement('h2');
+    newForwardNotes.classList.add('forward_notes');
+    if(forward.data().items.p13 && forward.data().items.water)
+        newForwardNotes.innerHTML = forward.data().items.p13+' gás P13 e '+forward.data().items.water+' água';
+    else if(forward.data().items.p13)
+        newForwardNotes.innerHTML = forward.data().items.p13+' gás P13';
+    else if(forward.data().items.water)
+        newForwardNotes.innerHTML = forward.data().items.water+' águas';
+    
+    newForwardNotes.innerHTML = newForwardNotes.innerHTML+' por R$ '+forward.data().value+',00 no dia '+forward.data().startTime;
+    
+    newForward.appendChild(newForwardAddress);
+    newForward.appendChild(newForwardTelephone);
+    newForward.appendChild(newPayForward);
+    newForward.appendChild(newForwardNotes);
+    pageForwardsContainer.appendChild(newForward);
+}
+
 function renderStock(p13Stock, waterStock) {
     let gasNumberElement         = document.getElementById('gas_number');
     let waterNumberElement       = document.getElementById('water_number');
