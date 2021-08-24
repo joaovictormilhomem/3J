@@ -28,6 +28,12 @@
     font-weight: 500;
 }
 
+.forward_notes{
+    font-size: 1.4rem;
+    font-weight: 300;
+    bottom: 10px;
+}
+
 .action_forward{
     background-color: rgba(0, 0, 0, 0.2);
     padding: 10px;
@@ -41,10 +47,4 @@
 }
 .action_forward:hover{
     background-color: rgba(255, 0, 0, 0.5);
-}
-
-.forward_items{
-    font-size: 1.4rem;
-    font-weight: 300;
-    bottom: 10px;
 }
