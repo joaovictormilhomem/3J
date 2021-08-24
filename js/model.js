@@ -141,7 +141,6 @@ function updateStockValue(item, value) {
 
 function updateCashValue() {
     checkUndefinedCash();
-    console.log(atualCash);
     db.collection('cash').doc(day).set({
         incash: atualCash.incash,
         card: atualCash.card,
