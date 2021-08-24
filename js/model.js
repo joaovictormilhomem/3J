@@ -50,11 +50,12 @@ function startLookingForChanges() {
     })
 }
 
-function createRequest(customer, address, items, value, op) {
+function createRequest(customer, address, telephone, items, value, op) {
     let now = new Date().valueOf();
     db.collection('requests').add({
         customer: customer,
         address: address,
+        telephone: telephone,
         items: items,
         status: 'waiting',
         startTime: now,

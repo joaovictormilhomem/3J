@@ -73,13 +73,15 @@ function showNewClientPopup() {
 }
 
 function closeNewRequestPopup(){
-    const addressElement = document.getElementById('input-request-address');
-    const p13Element     = document.getElementById('input-p13');
-    const waterElement   = document.getElementById('input-water');
-    const valueElement   = document.getElementById('input-value');
-    const opElement      = document.getElementById('input-op');
-    const newPopup       = document.getElementById('new-request-popup');
-    deleteFormFields([addressElement, p13Element, waterElement, valueElement, opElement]);
+    const addressElement   = document.getElementById('input-request-address');
+    const p13Element       = document.getElementById('input-p13');
+    const waterElement     = document.getElementById('input-water');
+    const valueElement     = document.getElementById('input-value');
+    const opElement        = document.getElementById('input-op');
+    const telephoneElement = document.getElementById('input-request-telephone');
+    const newPopup         = document.getElementById('new-request-popup');
+    
+    deleteFormFields([addressElement, p13Element, waterElement, valueElement, telephoneElement, opElement]);
     newPopup.style.display = 'none';
 }
 
@@ -104,6 +106,7 @@ function startNewRequestPopup() {
     const closeButton          = document.getElementById('close-popup-button-request');
     const clientElement        = document.getElementById('select-clients');
     const addressElement       = document.getElementById('input-request-address');
+    const telephoneElement     = document.getElementById('input-request-telephone');
     const p13Element           = document.getElementById('input-p13');
     const waterElement         = document.getElementById('input-water');
     const valueElement         = document.getElementById('input-value');
@@ -111,18 +114,18 @@ function startNewRequestPopup() {
 
     closeButton.onclick = () => closeNewRequestPopup();
     newButton.onclick = () => {
-        let client  = clientElement.value;
-        let address = addressElement.value;
-        let items   = {p13: p13Element.value, water: waterElement.value};
-        let value   = valueElement.value;
-        let op      = opElement.value;
+        let client    = clientElement.value;
+        let address   = addressElement.value;
+        let items     = {p13: p13Element.value, water: waterElement.value};
+        let value     = valueElement.value;
+        let op        = opElement.value;
+        let telephone = telephoneElement.value;
         
-        let response = handleCreateRequest(client, address, items, value, op);
+        let response = handleCreateRequest(client, address, telephone, items, value, op);
 
         if (response === 0) {
             closeNewRequestPopup();
             clientElement.value = null;
-            deleteFormFields([addressElement, p13Element, waterElement, valueElement, opElement]);
         }
         else
             switch (response) {
@@ -192,7 +195,7 @@ function renderRequest(request) {
     newRequest.setAttribute('data-p13', request.data().items.p13);
     newRequest.setAttribute('data-water', request.data().items.water);
     newRequest.setAttribute('data-value', request.data().value);
-    newRequest.setAttribute('data-cashOp', request.data().op);
+    newRequest.setAttribute('data-cash-op', request.data().op);
 
     let newRequestStatus     = document.createElement('div');
     newRequestStatus.ondblclick = () => {handleChangeRequestStatus(newRequest)};

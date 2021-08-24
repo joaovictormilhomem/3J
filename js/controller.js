@@ -18,10 +18,10 @@ function handleRenderRequests(requests) {
     requestsNotDeleted.forEach(request => renderRequest(request));
 }
 
-function handleCreateRequest(client, address, items, value, op) {   
+function handleCreateRequest(client, address, telephone, items, value, op) {   
     if(isFilled([address, items.p13, items.water, value]) && (items.p13 >= 1 || items.water >= 1)) {
         if(p13Stock >= items.p13 && waterStock >= items.water) {
-            createRequest(client, address, items, value, op);
+            createRequest(client, address, telephone, items, value, op);
             handleUpdateStock(items.p13, items.water, true);
             return 0;
         }
@@ -37,7 +37,7 @@ function handleChangeRequestStatus(requestElement) {
     let collection = requestElement.getAttribute('data-collection');
     let status     = requestElement.getAttribute('data-status');
     let value      = parseInt(requestElement.getAttribute('data-value'));
-    let op         = requestElement.getAttribute('data-cashOp');
+    let op         = requestElement.getAttribute('data-cash-op');
 
     if(status === 'waiting')
         startRequest(id, collection);
