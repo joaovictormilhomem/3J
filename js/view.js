@@ -318,8 +318,11 @@ function formatNotes(request) {
         notes = request.data().items.p13 + ' gás P13';
     else if(request.data().items.water)
         notes = request.data().items.water + ' águas';
-    
-    notes = notes + ' por R$ ' + request.data().value + ',00 no dia ' + request.data().startTime;
+
+    let day = new Date(request.data().startTime);
+    day = (day.getDate()) + '/' + (day.getMonth()+1) + '/' + day.getFullYear();
+
+    notes = notes + ' por R$ ' + request.data().value + ',00 no dia ' + day;
     if (request.data().paidvalue > 0) notes = notes + '. Valor restante: R$ ' + (request.data().value - request.data().paidvalue) + ',00';
 
     return notes;
