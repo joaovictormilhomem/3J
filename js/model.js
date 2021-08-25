@@ -196,7 +196,7 @@ function isFilled(values) {
 }
 
 function isForward(request) {
-    return request.data().op === 'forward';
+    return request.data().value > request.data().paidvalue;
 }
 
 function getCurrentDate() {

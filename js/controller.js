@@ -56,14 +56,12 @@ function handlePayForward(valueToBePaid, paymentMethod, forward) {
     let remainingValue = forward.data().value - forward.data().paidvalue;
     valueToBePaid = parseInt(valueToBePaid);
 
-    if (valueToBePaid > 0 && valueToBePaid < remainingValue && paymentMethod !== '')
+    if (valueToBePaid > 0 && valueToBePaid <= remainingValue && paymentMethod !== ''){
         changeForwardPaidValue(forward.id, valueToBePaid + parseInt(forward.data().paidvalue));
-    else if(valueToBePaid === remainingValue && paymentMethod !== ''){
-            changeForwardPaidValue(forward.id, valueToBePaid + forward.data().paidvalue);
-            changeForwardPaidValueAndOp(forward.id, paymentMethod);
+        handleUpdateCash(valueToBePaid, paymentMethod);
+        return 0;
     }
-    else
-        return 1;
+    else return 1;
 }
 
 function handleUpdateStock(p13, water, op) {

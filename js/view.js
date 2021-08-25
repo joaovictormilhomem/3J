@@ -176,7 +176,7 @@ function showAndStartNewForwardPaymentPopup(forward) {
         let op       = opElement.value;
         let response = handlePayForward(value, op, forward);
         
-        if (response === undefined) closeNewForwardPaymentPopup();
+        if (response === 0) closeNewForwardPaymentPopup();
         else
             switch (response) {
                 case 1: alert('preencha todos os campos corretamente'); break;
