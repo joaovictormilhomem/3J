@@ -52,6 +52,9 @@ function startLookingForChanges() {
 
 function createRequest(customer, address, telephone, items, value, op) {
     let now = new Date().valueOf();
+    let paidValue = value;
+    if (op === 'forward') paidValue = 0;
+
     db.collection('requests').add({
         customer: customer,
         address: address,
@@ -60,6 +63,7 @@ function createRequest(customer, address, telephone, items, value, op) {
         status: 'waiting',
         startTime: now,
         value: value,
+        paidvalue: paidValue,
         op: op
     }).then((doc)=>{
     }).catch(err=>{
@@ -154,8 +158,12 @@ function updateCashValue() {
 
     // Logic functions
 
+function wasNotDeletedAndIsFinished(request) {
+    return request.data().status !== 'deleted' && request.data().status === 'finished';
+}
+
 function wasNotDeletedOrFinished(request) { 
-    return request.data().status !== 'deleted' && request.data().status !== 'finished'
+    return request.data().status !== 'deleted' && request.data().status !== 'finished';
 }
 
 function isFilled(values) {
@@ -166,6 +174,10 @@ function isFilled(values) {
         }
     });
     return filled;
+}
+
+function isForward(request) {
+    return request.data().op === 'forward';
 }
 
 function getCurrentDate() {

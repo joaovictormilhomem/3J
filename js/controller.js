@@ -14,8 +14,13 @@ function handleDeleteRequest(requestElement) {
 }
 
 function handleRenderRequests(requests) {
-    let requestsNotDeleted = requests.filter(wasNotDeletedOrFinished);
-    requestsNotDeleted.forEach(request => renderRequest(request));
+    let requestsNotDeletedOrFinished = requests.filter(wasNotDeletedOrFinished);
+    requestsNotDeletedOrFinished.forEach(request => renderRequest(request));
+}
+
+function handleRenderForwards(forwards) {
+    let requestsNotDeletedAndIsFinished = forwards.filter(wasNotDeletedAndIsFinished);
+    requestsNotDeletedAndIsFinished.forEach(forward => renderForward(forward));
 }
 
 function handleCreateRequest(client, address, telephone, items, value, op) {   
@@ -45,6 +50,16 @@ function handleChangeRequestStatus(requestElement) {
         handleUpdateCash(value, op);
         finishRequest(id, collection);
     }
+}
+
+function handlePayForward(forwardElement) {
+    let id         = forwardElement.getAttribute('data-id');
+    let collection = forwardElement.getAttribute('data-collection');
+    let value      = parseInt(forwardElement.getAttribute('data-value'));
+    let paidValue  = parseInt(forwardElement.getAttribute('data-paid-value'));
+    let op         = forwardElement.getAttribute('data-cash-op');
+
+    console.log(value, paidValue);
 }
 
 function handleUpdateStock(p13, water, op) {
@@ -80,11 +95,13 @@ function start() {
     startLookingForChanges();
     checkUndefinedCash();
 
-    let autoHandleRenderRequests = setInterval(() => {
+    let autoRenderRequestsAndForwards = setInterval(() => {
         if(requestListCopy !== requestList){
             requestListCopy = requestList;
-            clearRequests();
+            clearRequestsAndForwards();
             handleRenderRequests(requestList);
+            let forwardsList = requestList.filter(isForward);
+            handleRenderForwards(forwardsList);
         }
     }, 500)
 

@@ -239,8 +239,9 @@ function renderRequest(request) {
     pageRequestsContainer.appendChild(newRequest);
 }
 
-function clearRequests() {
+function clearRequestsAndForwards() {
     pageRequestsContainer.innerHTML = '';
+    pageForwardsContainer.innerHTML = '';
     startAddButtons();
 }
 
@@ -253,9 +254,9 @@ function renderForward(forward) {
     newForward.setAttribute('data-p13', forward.data().items.p13);
     newForward.setAttribute('data-water', forward.data().items.water);
     newForward.setAttribute('data-value', forward.data().value);
+    newForward.setAttribute('data-paid-value', forward.data().paidvalue);
     newForward.setAttribute('data-cash-op', forward.data().op);
     newForward.setAttribute('data-telephone', forward.data().telephone);
-    newForward.setAttribute('title', forward.data().op);
 
     let newForwardAddress       = document.createElement('h1');
     newForwardAddress.innerHTML = forward.data().address;
@@ -272,20 +273,29 @@ function renderForward(forward) {
 
     let newForwardNotes = document.createElement('h2');
     newForwardNotes.classList.add('forward_notes');
-    if(forward.data().items.p13 && forward.data().items.water)
-        newForwardNotes.innerHTML = forward.data().items.p13+' gás P13 e '+forward.data().items.water+' água';
-    else if(forward.data().items.p13)
-        newForwardNotes.innerHTML = forward.data().items.p13+' gás P13';
-    else if(forward.data().items.water)
-        newForwardNotes.innerHTML = forward.data().items.water+' águas';
-    
-    newForwardNotes.innerHTML = newForwardNotes.innerHTML+' por R$ '+forward.data().value+',00 no dia '+forward.data().startTime;
-    
+    newForwardNotes.innerHTML = formatNotes(forward);
+
     newForward.appendChild(newForwardAddress);
     newForward.appendChild(newForwardTelephone);
     newForward.appendChild(newPayForward);
     newForward.appendChild(newForwardNotes);
     pageForwardsContainer.appendChild(newForward);
+}
+
+function formatNotes(request) {
+    let notes;
+
+    if(request.data().items.p13 && request.data().items.water)
+        notes = request.data().items.p13 + ' gás P13 e ' + request.data().items.water + ' água';
+    else if(request.data().items.p13)
+        notes = request.data().items.p13 + ' gás P13';
+    else if(request.data().items.water)
+        notes = request.data().items.water + ' águas';
+    
+    notes = notes + ' por R$ ' + request.data().value + ',00 no dia ' + request.data().startTime;
+    if (request.data().paidvalue > 0) notes = notes + '. Valor restante: R$ ' + (request.data().value - request.data().paidvalue) + ',00';
+
+    return notes;
 }
 
 function renderStock(p13Stock, waterStock) {
