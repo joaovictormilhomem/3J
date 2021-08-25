@@ -52,14 +52,18 @@ function handleChangeRequestStatus(requestElement) {
     }
 }
 
-function handlePayForward(forwardElement) {
-    let id         = forwardElement.getAttribute('data-id');
-    let collection = forwardElement.getAttribute('data-collection');
-    let value      = parseInt(forwardElement.getAttribute('data-value'));
-    let paidValue  = parseInt(forwardElement.getAttribute('data-paid-value'));
-    let op         = forwardElement.getAttribute('data-cash-op');
+function handlePayForward(valueToBePaid, paymentMethod, forward) {
+    let remainingValue = forward.data().value - forward.data().paidvalue;
+    valueToBePaid = parseInt(valueToBePaid);
 
-    console.log(value, paidValue);
+    if (valueToBePaid > 0 && valueToBePaid < remainingValue && paymentMethod !== '')
+        changeForwardPaidValue(forward.id, valueToBePaid + parseInt(forward.data().paidvalue));
+    else if(valueToBePaid === remainingValue && paymentMethod !== ''){
+            changeForwardPaidValue(forward.id, valueToBePaid + forward.data().paidvalue);
+            changeForwardPaidValueAndOp(forward.id, paymentMethod);
+    }
+    else
+        return 1;
 }
 
 function handleUpdateStock(p13, water, op) {

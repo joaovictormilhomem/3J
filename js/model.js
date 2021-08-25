@@ -50,6 +50,25 @@ function startLookingForChanges() {
     })
 }
 
+function changeForwardPaidValue(id, paidValue) {
+    db.collection('requests').doc(id).update({
+        paidvalue: paidValue
+    }).then(() => {
+    }).catch(error => {
+        console.log(error);
+    })
+}
+
+function changeForwardPaidValueAndOp(id, paidValue, op) {
+    db.collection('requests').doc(id).update({
+        paidvalue: paidValue,
+        op: op
+    }).then(() => {
+    }).catch(error => {
+        console.log(error);
+    })
+}
+
 function createRequest(customer, address, telephone, items, value, op) {
     let now = new Date().valueOf();
     let paidValue = value;

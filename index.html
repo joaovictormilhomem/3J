@@ -174,6 +174,25 @@
     </div>
   </div>
 
+  <div class='popup' id='new-forward-payment'>
+    <div class='popup-container' id="new-forward-payment-popup-container">
+      
+      <label for='input-forward-payment-value'>Valor</label>
+      <input type='number' id='input-forward-payment-value' name='input-forward-payment-value'>
+
+      <label for="input-forward-payment-op">Pagamento</label>
+      <select name="input-forward-payment-op" id="input-forward-payment-op">
+        <option value="incash">A vista</option>
+        <option value="card">Cartão</option>
+        <option value="pix">PIX</option>
+        <option value="forward">Pagar depois</option>
+      </select>
+
+      <button id='forward-payment-new-button'>Pagar</button>
+
+      <button id='forward-payment-close-popup-button' class="close-popup-button">X</button>
+    </div>
+  </div>
 
   <script src='https://www.gstatic.com/firebasejs/8.6.3/firebase-app.js'></script>
   <script src='https://www.gstatic.com/firebasejs/8.6.3/firebase-analytics.js'></script>

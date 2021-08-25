@@ -98,18 +98,22 @@ function closeNewClientPopup(){
     newPopup.style.display = 'none';
 }
 
+function closeNewForwardPaymentPopup() {
+    const newForwardPaymentPopup = document.getElementById('new-forward-payment');
+    const valueElement = document.getElementById('input-forward-payment-value');
+    const opElement    = document.getElementById('input-forward-payment-op');
+
+    deleteFormFields([valueElement, opElement]);
+    newForwardPaymentPopup.style.display = 'none';
+}
+
     // Outros
 
 function deleteFormFields(fields) {
-    fields.forEach(field => {
-        field.value = '';
-        field.checked = false;
-    });
+    fields.forEach(field => field.value = '');
 }
 
 function startNewRequestPopup() {
-    const newReqPopup          = document.getElementById('new-request-popup');
-    const newReqPopupContainer = newReqPopup.children[0];
     const newButton            = document.getElementById('new-popup-button-request');
     const closeButton          = document.getElementById('close-popup-button-request');
     const clientElement        = document.getElementById('select-clients');
@@ -157,6 +161,29 @@ function startNewClientPopup() {
         handleNewClientClick(client, address, itens);
         closeNewClientPopup();
     }
+}
+
+function showAndStartNewForwardPaymentPopup(forward) {
+    const newForwardPaymentPopup = document.getElementById('new-forward-payment');
+    const newButton    = document.getElementById('forward-payment-new-button');
+    const closeButton  = document.getElementById('forward-payment-close-popup-button');
+    const valueElement = document.getElementById('input-forward-payment-value');
+    const opElement    = document.getElementById('input-forward-payment-op');
+
+    closeButton.onclick = () => closeNewForwardPaymentPopup();
+    newButton.onclick   = () => {
+        let value    = valueElement.value;
+        let op       = opElement.value;
+        let response = handlePayForward(value, op, forward);
+        
+        if (response === undefined) closeNewForwardPaymentPopup();
+        else
+            switch (response) {
+                case 1: alert('preencha todos os campos corretamente'); break;
+                default: break;
+            }
+    }
+    newForwardPaymentPopup.style.display = 'flex'; 
 }
 
 function startAddButtons() {
@@ -268,7 +295,7 @@ function renderForward(forward) {
 
     let newPayForward       = document.createElement('p');
     newPayForward.innerHTML = 'Pagar';
-    newPayForward.onclick   = () => {handlePayForward(newForward)};
+    newPayForward.onclick   = () => {showAndStartNewForwardPaymentPopup(forward)};
     newPayForward.classList.add('pay_forward', 'text-base');
 
     let newForwardNotes = document.createElement('h2');

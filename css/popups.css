@@ -59,12 +59,9 @@
     margin-right: 10px;
 }
 
-/* #input-op{
-    width: 200px;
-} */
-
 .popup button{
     padding: 10px 30px;
+    margin-top: 20px;
     border: none;
     border-radius: var(--border-radius-popup);
     cursor: pointer;
@@ -83,7 +80,7 @@
 
 .close-popup-button{
     position: absolute;
-    top: 10px;
+    top: -20px;
     right: 10px !important;
 
     width: 40px !important;
@@ -92,4 +89,22 @@
     font-family: cursive !important;
 
     background-color: transparent !important;
+}
+
+#new-forward-payment-popup-container{
+    flex-direction: column;
+    width: 280px;
+}
+
+#input-forward-payment-value{
+    width: 200px;
+}
+
+#input-forward-payment-op{
+    width: 200px;
+}
+
+#forward-payment-new-button{
+    align-self: start;
+    width: 200px;
 }
