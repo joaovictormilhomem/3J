@@ -1,4 +1,4 @@
-var firebaseConfig = {
+const firebaseConfig = {
     apiKey: "AIzaSyDq48j5uf5OWCChZp8WfsEs5-41mc7HHY4",
     authDomain: "jgas-94bed.firebaseapp.com",
     projectId: "jgas-94bed",
@@ -7,6 +7,15 @@ var firebaseConfig = {
     appId: "1:606477017238:web:7c7d54667db0fe146ce2b7",
     measurementId: "G-2STVC1E1DG"
 };
+
+const firebaseConfigTest = {
+    apiKey: "AIzaSyABSsEu7ZB_EL9x1JjsZ-LtzLdY26-3huY",
+    authDomain: "testes-c2530.firebaseapp.com",
+    projectId: "testes-c2530",
+    storageBucket: "testes-c2530.appspot.com",
+    messagingSenderId: "940440141576",
+    appId: "1:940440141576:web:f56f9802ada74cd7d8b6bd"
+  };
 
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();

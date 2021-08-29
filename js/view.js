@@ -129,7 +129,7 @@ function startNewRequestPopup() {
         let client    = clientElement.value;
         let address   = addressElement.value;
         let items     = {p13: p13Element.value, water: waterElement.value};
-        let value     = valueElement.value;
+        let value     = parseFloat(valueElement.value);
         let op        = opElement.value;
         let telephone = telephoneElement.value;
         
@@ -257,7 +257,7 @@ function renderRequest(request) {
     else if(request.data().items.water)
         newRequestItems.innerHTML = request.data().items.water+' águas';
     
-    newRequestItems.innerHTML = newRequestItems.innerHTML+' por R$ '+request.data().value+',00';
+    newRequestItems.innerHTML = newRequestItems.innerHTML+' por '+ request.data().value.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
     
     newRequest.appendChild(newRequestStatus);
     newRequest.appendChild(newRequestAddress);
@@ -322,8 +322,8 @@ function formatNotes(request) {
     let day = new Date(request.data().startTime);
     day = (day.getDate()) + '/' + (day.getMonth()+1) + '/' + day.getFullYear();
 
-    notes = notes + ' por R$ ' + request.data().value + ',00 no dia ' + day;
-    if (request.data().paidvalue > 0) notes = notes + '. Valor restante: R$ ' + (request.data().value - request.data().paidvalue) + ',00';
+    notes = notes + request.data().value.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+    if (request.data().paidvalue > 0) notes = notes + '. Valor restante: ' + (request.data().value - request.data().paidvalue).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
 
     return notes;
 }
@@ -342,9 +342,9 @@ function renderCash(atualCash) {
     let forwardNumberElement = document.getElementById('forward_number');
     let totalNumberElement   = document.getElementById('total_number');
     
-    moneyNumberElement.innerHTML   = 'R$ ' + atualCash.incash + ',00';
-    cardNumberElement.innerHTML    = 'R$ ' + atualCash.card + ',00';
-    pixNumberElement.innerHTML     = 'R$ ' + atualCash.pix + ',00';
-    forwardNumberElement.innerHTML = 'R$ ' + atualCash.forward + ',00';
-    totalNumberElement.innerHTML   = 'R$ ' + atualCash.total + ',00';
+    moneyNumberElement.innerHTML   = atualCash.incash.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+    cardNumberElement.innerHTML    = atualCash.card.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+    pixNumberElement.innerHTML     = atualCash.pix.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+    forwardNumberElement.innerHTML = atualCash.forward.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+    totalNumberElement.innerHTML   = atualCash.total.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
 }
