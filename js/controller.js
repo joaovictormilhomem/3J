@@ -41,7 +41,7 @@ function handleChangeRequestStatus(requestElement) {
     let id         = requestElement.getAttribute('data-id');
     let collection = requestElement.getAttribute('data-collection');
     let status     = requestElement.getAttribute('data-status');
-    let value      = parseInt(requestElement.getAttribute('data-value'));
+    let value      = parseFloat(requestElement.getAttribute('data-value'));
     let op         = requestElement.getAttribute('data-cash-op');
 
     if(status === 'waiting')
@@ -54,10 +54,10 @@ function handleChangeRequestStatus(requestElement) {
 
 function handlePayForward(valueToBePaid, paymentMethod, forward) {
     let remainingValue = forward.data().value - forward.data().paidvalue;
-    valueToBePaid = parseInt(valueToBePaid);
+    valueToBePaid = parseFloat(valueToBePaid);
 
     if (valueToBePaid > 0 && valueToBePaid <= remainingValue && paymentMethod !== ''){
-        changeForwardPaidValue(forward.id, valueToBePaid + parseInt(forward.data().paidvalue));
+        changeForwardPaidValue(forward.id, valueToBePaid + parseFloat(forward.data().paidvalue));
         handleUpdateCash(valueToBePaid, paymentMethod);
         return 0;
     }
