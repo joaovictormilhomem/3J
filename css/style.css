@@ -12,6 +12,7 @@
 body{
     display: flex;
     font-family: 'Roboto', sans-serif;
+    background-color: #ADC2D1;
 }
 
 .text-base{
@@ -46,7 +47,8 @@ body{
 
 .content{
     width: calc(100vw - var(--menu-size));
-    height: 100vh;
+    min-height: 100vh;
+    height: 100%;
     background-color: #ADC2D1;
 }
 
