@@ -308,7 +308,7 @@ function formatNotes(request) {
     else if(request.data().items.water)
         notes = request.data().items.water + ' águas ';
 
-    notes = notes + request.data().value.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+    notes = notes +'por '+ request.data().value.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
     if (request.data().paidvalue > 0) notes = notes + '. Valor restante: ' + (request.data().value - request.data().paidvalue).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
 
     return notes;
