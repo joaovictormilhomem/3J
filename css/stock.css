@@ -33,10 +33,18 @@
     font-size: 3rem;
 }
 
+#gas_icon{
+    background-image: url('/assets/gas.svg');
+}
+
 #water_icon{
     background-image: url('/assets/water.svg');
 }
 
-#gas_icon{
-    background-image: url('/assets/gas.svg');
+#canister_icon{
+    background-image: url('/assets/canister.svg');
+}
+
+#gallon_icon{
+    background-image: url('/assets/gallon.svg');
 }

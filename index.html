@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang='en'>
+<html lang='pt-BR'>
 
 <head>
   <meta charset='UTF-8'>
@@ -28,7 +28,6 @@
         <li id='btn_customers'>Clientes</li>
         <li id='btn_stock'>Estoque</li>
         <li id='btn_cash'>Caixa</li>
-        <li id='btn_management'>Gerência</li>
       </ul>
     </nav>
   </div>
@@ -61,23 +60,29 @@
     </div>
 
     <div id='page_customers'>
-      <div id='page_customers_container'></div>
-      page_customers
-      <!-- <div class='add-btn'></div> -->
+      <div id='page_customers_container'>page_customers</div>
+      <div class='add-btn'></div>
     </div>
 
     <div id='page_stock'>
       <div id='page_stock_container'>
-        <div class='icon_container'>
+        <div class='icon_container' title="gás cheio">
           <div class='icon' id='gas_icon'></div>
           <div class='icon_number' id='gas_number'></div>
         </div>
-        <div class='icon_container'>
+        <div class='icon_container' title="agua cheia">
           <div class='icon' id='water_icon'></div>
           <div class='icon_number' id='water_number'></div>
         </div>
+        <div class='icon_container' title="gás vazio">
+          <div class='icon' id='canister_icon'></div>
+          <div class='icon_number' id='canister_number'></div>
+        </div>
+        <div class='icon_container' title="agua vazia">
+          <div class='icon' id='gallon_icon'></div>
+          <div class='icon_number' id='gallon_number'></div>
+        </div>
       </div>
-      <!-- <div class='add-btn'></div> -->
     </div>
 
     <div id='page_cash'>
@@ -103,12 +108,6 @@
           <div class='icon_number' id='total_number'></div>
         </div>
       </div>
-      <!-- <div class='add-btn'></div> -->
-    </div>
-
-    <div id='page_management'>
-      <div id='page_management_container'></div>
-      page_management
     </div>
   </div>
 
