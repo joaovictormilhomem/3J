@@ -91,8 +91,9 @@ function handleUpdateCash(value, op) {
     updateCashValue();
 }
 
-function start() {
+async function start() {
     day = getCurrentDate();
+    let checkStartFirebase = await startFirebase();
     startNewRequestPopup();
     startNewClientPopup();
     startAddButtons();
