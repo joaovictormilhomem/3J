@@ -61,6 +61,7 @@ function startLookingForChanges() {
                 atualCash.card = item.data().card;
                 atualCash.pix = item.data().pix;
                 atualCash.forward = item.data().forward;
+                atualCash.expense = item.data().expense;
                 atualCash.total = atualCash.incash + atualCash.card + atualCash.pix;
             }
             checkUndefinedCash();
@@ -250,7 +251,7 @@ function checkUndefinedCash() {
     keys = ['incash', 'card', 'pix', 'forward', 'total'];
 
     keys.forEach(key => {
-        if(atualCash[key] === undefined)
+        if(atualCash[key] === undefined || isNaN(atualCash[key]))
             atualCash[key] = 0;
     });
 }
