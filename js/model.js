@@ -70,7 +70,7 @@ function startLookingForChanges() {
 
 function createBackward(id, value, paymentMethod){
     let now = new Date().valueOf();
-    db.collection('requests').add({
+    db.collection('backwards').add({
         forward: id,
         when: now,
         value: value,
