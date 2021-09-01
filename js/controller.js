@@ -55,9 +55,11 @@ function handleChangeRequestStatus(requestElement) {
 function handlePayForward(valueToBePaid, paymentMethod, forward) {
     let remainingValue = forward.data().value - forward.data().paidvalue;
     valueToBePaid = parseFloat(valueToBePaid);
+    let finalValue = valueToBePaid + parseFloat(forward.data().paidvalue);
 
     if (valueToBePaid > 0 && valueToBePaid <= remainingValue && paymentMethod !== ''){
-        changeForwardPaidValue(forward.id, valueToBePaid + parseFloat(forward.data().paidvalue));
+        changeForwardPaidValue(forward.id, finalValue);
+        createBackward(forward.id, valueToBePaid, paymentMethod);
         handleUpdateCash(valueToBePaid, paymentMethod);
         return 0;
     }

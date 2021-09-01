@@ -62,6 +62,19 @@ function startLookingForChanges() {
     })
 }
 
+function createBackward(id, value, paymentMethod){
+    let now = new Date().valueOf();
+    db.collection('requests').add({
+        forward: id,
+        when: now,
+        value: value,
+        op: paymentMethod
+    }).then((doc)=>{
+    }).catch(err=>{
+        console.log(err);
+    })
+}
+
 function changeForwardPaidValue(id, paidValue) {
     db.collection('requests').doc(id).update({
         paidvalue: paidValue
