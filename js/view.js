@@ -304,12 +304,9 @@ function formatNotes(request) {
     if(request.data().items.p13 && request.data().items.water)
         notes = request.data().items.p13 + ' gás P13 e ' + request.data().items.water + ' água';
     else if(request.data().items.p13)
-        notes = request.data().items.p13 + ' gás P13';
+        notes = request.data().items.p13 + ' gás P13 ';
     else if(request.data().items.water)
-        notes = request.data().items.water + ' águas';
-
-    let day = new Date(request.data().startTime);
-    day = (day.getDate()) + '/' + (day.getMonth()+1) + '/' + day.getFullYear();
+        notes = request.data().items.water + ' águas ';
 
     notes = notes + request.data().value.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
     if (request.data().paidvalue > 0) notes = notes + '. Valor restante: ' + (request.data().value - request.data().paidvalue).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
