@@ -248,7 +248,7 @@ function getCurrentDate() {
 }
 
 function checkUndefinedCash() {
-    keys = ['incash', 'card', 'pix', 'forward', 'total'];
+    keys = ['incash', 'card', 'pix', 'forward', 'expense', 'total'];
 
     keys.forEach(key => {
         if(atualCash[key] === undefined || isNaN(atualCash[key]))

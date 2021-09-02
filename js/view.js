@@ -326,11 +326,13 @@ function renderCash(atualCash) {
     let cardNumberElement    = document.getElementById('card_number');
     let pixNumberElement     = document.getElementById('pix_number');
     let forwardNumberElement = document.getElementById('forward_number');
+    let expenseNumberElement = document.getElementById('expense_number');
     let totalNumberElement   = document.getElementById('total_number');
     
     moneyNumberElement.innerHTML   = atualCash.incash.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
     cardNumberElement.innerHTML    = atualCash.card.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
     pixNumberElement.innerHTML     = atualCash.pix.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
     forwardNumberElement.innerHTML = atualCash.forward.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+    expenseNumberElement.innerHTML = atualCash.expense.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
     totalNumberElement.innerHTML   = atualCash.total.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
 }

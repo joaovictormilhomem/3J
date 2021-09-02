@@ -68,18 +68,12 @@ function handlePayForward(valueToBePaid, paymentMethod, forward) {
 
 function handleUpdateStock(p13, water, op) {
     if (op) {
-        if (p13 > 0)
-            updateStockValue('p13', p13Stock - p13);
-    
-        if(water > 0)
-        updateStockValue('water', waterStock - water);        
+        if (p13 > 0) updateStockValue('p13', p13Stock - p13);
+        if(water > 0) updateStockValue('water', waterStock - water);
     }
     else{
-        if (p13 > 0)
-            updateStockValue('p13', p13Stock + p13);
-    
-        if(water > 0)
-        updateStockValue('water', waterStock + water);  
+        if (p13 > 0) updateStockValue('p13', p13Stock + p13);
+        if(water > 0) updateStockValue('water', waterStock + water);
     }
 }
 
@@ -116,6 +110,7 @@ async function start() {
             atualCashCopy.card    = atualCash.card;
             atualCashCopy.pix     = atualCash.pix;
             atualCashCopy.forward = atualCash.forward;
+            atualCashCopy.expense = atualCash.expense;
             atualCashCopy.total   = atualCash.total;
             renderCash(atualCashCopy);
         }
