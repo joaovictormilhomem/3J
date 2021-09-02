@@ -4,6 +4,27 @@
     display: none;
 }
 
+.search_bar{
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.search_bar input{
+    width: 100%;
+    padding: 5px;
+    font-size: 2rem;
+    border: none;
+    border-radius: 5px;
+}
+.search_bar input:focus{
+    outline: none;
+}
+
+.search_bar button{
+    width: 100px;
+    height: 60px;
+}
+
 .forward{
     display: flex;
     flex-direction: column;

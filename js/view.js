@@ -261,6 +261,11 @@ function clearRequestsAndForwards() {
     startAddButtons();
 }
 
+function clearForwards() {
+    pageForwardsContainer.innerHTML = '';
+    startAddButtons();
+}
+
 function renderForward(forward) {
     let newForward = document.createElement('div');
     newForward.classList.add('forward');

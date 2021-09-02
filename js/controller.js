@@ -85,6 +85,23 @@ function handleUpdateCash(value, op) {
     updateCashValue();
 }
 
+function startSearch() {
+    let forwardsSearchBar = document.getElementById('forwards_search_bar');
+
+    forwardsSearchBar.onkeyup = () => {
+        let value = forwardsSearchBar.value.toLowerCase();
+        let forwardsList = requestList.filter(isForward);
+
+        forwardsList = forwardsList.filter((request) => {
+            let address = request.data().address.toLowerCase();
+            return address.includes(value);
+        })
+        
+        clearForwards();
+        handleRenderForwards(forwardsList);
+    }
+}
+
 async function start() {
     day = getCurrentDate();
     let checkStartFirebase = await startFirebase();
@@ -93,6 +110,7 @@ async function start() {
     startAddButtons();
     startLookingForChanges();
     checkUndefinedCash();
+    startSearch();
 
     let autoRenderRequestsAndForwards = setInterval(() => {
         if(requestListCopy !== requestList){
