@@ -62,6 +62,7 @@ function startLookingForChanges() {
                 atualCash.pix = item.data().pix;
                 atualCash.forward = item.data().forward;
                 atualCash.expense = item.data().expense;
+                atualCash.incash = atualCash.incash - atualCash.expense;
                 atualCash.total = atualCash.incash + atualCash.card + atualCash.pix - atualCash.expense;
             }
             checkUndefinedCash();
