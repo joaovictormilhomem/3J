@@ -28,7 +28,7 @@ function startFirebase() {
             appId: "1:940440141576:web:f56f9802ada74cd7d8b6bd"
         };
 
-        firebase.initializeApp(firebaseConfig);
+        firebase.initializeApp(firebaseConfigTest);
         firebase.analytics();
         
         db   = firebase.firestore()
@@ -63,7 +63,7 @@ function startLookingForChanges() {
                 atualCash.forward = item.data().forward;
                 atualCash.expense = item.data().expense;
                 atualCash.incash = atualCash.incash - atualCash.expense;
-                atualCash.total = atualCash.incash + atualCash.card + atualCash.pix - atualCash.expense;
+                atualCash.total = atualCash.incash + atualCash.card + atualCash.pix;
             }
             checkUndefinedCash();
         })
@@ -97,6 +97,29 @@ function changeForwardPaidValueAndOp(id, paidValue, op) {
         paidvalue: paidValue,
         op: op
     }).then(() => {
+    }).catch(error => {
+        console.log(error);
+    })
+}
+
+function createExpense(value, item, notes){
+    let now = new Date().valueOf();
+    db.collection('expenses').add({
+        item: item,
+        notes: notes,
+        createTime: now,
+        value: value
+    }).then((doc)=>{
+    }).catch(err=>{
+        console.log(err);
+    })
+}
+
+function updateExpenseCashValue(value) {
+    let day = getCurrentDate();
+    db.collection('cash').doc(day).set({
+        expense: value
+    }, { merge: true }).then(() => {
     }).catch(error => {
         console.log(error);
     })

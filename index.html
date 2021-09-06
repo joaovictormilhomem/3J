@@ -119,6 +119,7 @@
           </div>
         </div>
       </div>
+      <div class='add-btn' id='add-btn-cash'></div>
     </div>
   </div>
 
@@ -200,6 +201,29 @@
       <button id='forward-payment-new-button'>Pagar</button>
 
       <button id='forward-payment-close-popup-button' class="close-popup-button">X</button>
+    </div>
+  </div>
+
+  <div class='popup' id='new-expense-popup'>
+    <div class='popup-container' id="new-expense-popup-container">
+      
+      <label for='input-expense-value'>Valor</label>
+      <input type='number' id='input-expense-value' name='input-expense-value'>
+
+      <label for="input-expense-item">Item</label>
+      <select name="input-expense-item" id="input-expense-item">
+        <option value="gasolina">Gasolina</option>
+        <option value="gas">Compra de gás</option>
+        <option value="agua">Compra de água</option>
+        <option value="outro">Outro</option>
+      </select>
+
+      <label for='input-expense-notes'>Descrição</label>
+      <input type="text" id='input-expense-notes' name='input-expense-notes'>
+
+      <button id='new-expense-button'>Lançar despesa</button>
+
+      <button id='close-expense-popup-button' class="close-popup-button">X</button>
     </div>
   </div>
 

@@ -48,6 +48,11 @@ btnCash.onclick = () => {
 
     // Show/Close
 
+function showNewExpensePopup() {
+    let newExpensePopup = document.getElementById('new-expense-popup');
+    newExpensePopup.style.display = 'flex';
+}
+
 function showNewRequestPopup() {
     const newReqPopup         = document.getElementById('new-request-popup');
     newReqPopup.style.display = 'flex';
@@ -67,6 +72,11 @@ function showNewClientPopup() {
         handleNewClientClick(client, address, itens);
         closeNewClientPopup();
     }
+}
+
+function closeNewExpensePopup() {
+    let newExpensePopup = document.getElementById('new-expense-popup');
+    newExpensePopup.style.display = 'none';
 }
 
 function closeNewRequestPopup(){
@@ -152,6 +162,27 @@ function startNewClientPopup() {
     }
 }
 
+function startNewExpensePopup() {
+    let newExpenseCloseBtn = document.getElementById('close-expense-popup-button');
+    let newExpenseButton   = document.getElementById('new-expense-button');
+
+    newExpenseCloseBtn.onclick = () => closeNewExpensePopup();
+
+    newExpenseButton.onclick = () => {
+        let valueElement = document.getElementById('input-expense-value');
+        let itemElement  = document.getElementById('input-expense-item');
+        let notesElement = document.getElementById('input-expense-notes');
+
+        let response = handleNewExpenseClick(parseFloat(valueElement.value), itemElement.value, notesElement.value);
+        if (response === 1) alert('Preencha o valor corretamente!');
+        else {
+            closeNewExpensePopup();
+            itemElement.selectedIndex = 0;
+            deleteFormFields([valueElement, notesElement]);
+        }
+    }
+}
+
 function showAndStartNewForwardPaymentPopup(forward) {
     const newForwardPaymentPopup = document.getElementById('new-forward-payment');
     const newButton    = document.getElementById('forward-payment-new-button');
@@ -178,6 +209,7 @@ function showAndStartNewForwardPaymentPopup(forward) {
 function startAddButtons() {
     addButtons[0].onclick = () => showNewRequestPopup();
     //addButtons[1].onclick = () => showNewClientPopup();
+    addButtons[2].onclick = () => showNewExpensePopup();
 }
 
 function renderClient(client) {

@@ -23,6 +23,15 @@ function handleRenderForwards(forwards) {
     requestsNotDeletedAndIsFinished.forEach(forward => renderForward(forward));
 }
 
+function handleNewExpenseClick(value, item, notes){
+    if (value !== '' && value >= 0.1 && !isNaN(value)){
+        createExpense(value, item, notes);
+        checkUndefinedCash();
+        updateExpenseCashValue(value + atualCash.expense);
+    }
+    else return 1;
+}
+
 function handleCreateRequest(client, address, telephone, items, value, op) {   
     if(isFilled([address, items.p13, items.water, value]) && (items.p13 >= 1 || items.water >= 1)) {
         if(p13Stock >= items.p13 && waterStock >= items.water) {
@@ -105,6 +114,7 @@ function startSearch() {
 async function start() {
     day = getCurrentDate();
     let checkStartFirebase = await startFirebase();
+    startNewExpensePopup();
     startNewRequestPopup();
     startNewClientPopup();
     startAddButtons();
