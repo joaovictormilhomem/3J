@@ -245,6 +245,11 @@ function login(email,password) {
 }
 
 // Logic
+
+function isARequestFinishedToday(request) {
+    return (shortDate(request.data().startTime) === shortDate(new Date()) && request.data().status === 'finished');
+}
+
 function wasNotDeletedAndIsFinished(request) {
     return request.data().status !== 'deleted' && request.data().status === 'finished';
 }
@@ -272,6 +277,12 @@ function getCurrentDate() {
     return (day.getDate()) + '-' + (day.getMonth()+1) + '-' + day.getFullYear();
 }
 
+function shortDate(timestamp) {
+    let date = new Date(timestamp);
+    let dateString = date.getDate()+'/'+(date.getMonth() + 1)+'/'+date.getFullYear(); //+' '+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds();
+    return dateString;
+}
+
 function checkUndefinedCash() {
     keys = ['incash', 'card', 'pix', 'forward', 'expense', 'total'];
 
@@ -280,3 +291,5 @@ function checkUndefinedCash() {
             atualCash[key] = 0;
     });
 }
+
+console.log();

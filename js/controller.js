@@ -2,6 +2,7 @@ let requestListCopy = [];
 let p13StockCopy;
 let waterStockCopy;
 let atualCashCopy = {};
+let isHistoryRequestsOn = false;
 
 function handleDeleteRequest(requestElement) {
     let id         = requestElement.getAttribute('data-id');
@@ -13,9 +14,15 @@ function handleDeleteRequest(requestElement) {
     handleUpdateStock(p13, water, false);
 }
 
-function handleRenderRequests(requests) {
-    let requestsNotDeletedOrFinished = requests.filter(wasNotDeletedOrFinished);
-    requestsNotDeletedOrFinished.forEach(request => renderRequest(request));
+function handleRenderRequests() {
+    if (isHistoryRequestsOn) {
+        let requestFinishedTodayList = requestList.filter(isARequestFinishedToday);
+        requestFinishedTodayList.forEach(request => renderRequest(request));
+    }
+    else{
+        let requestsNotDeletedOrFinished = requestList.filter(wasNotDeletedOrFinished);
+        requestsNotDeletedOrFinished.forEach(request => renderRequest(request));
+    }
 }
 
 function handleRenderForwards(forwards) {
@@ -55,7 +62,7 @@ function handleChangeRequestStatus(requestElement) {
 
     if(status === 'waiting')
         startRequest(id, collection);
-    else{
+    else if(status === 'started'){
         handleUpdateCash(value, op);
         finishRequest(id, collection);
     }
@@ -126,7 +133,7 @@ async function start() {
         if(requestListCopy !== requestList){
             requestListCopy = requestList;
             clearRequestsAndForwards();
-            handleRenderRequests(requestList);
+            handleRenderRequests();
             let forwardsList = requestList.filter(isForward);
             handleRenderForwards(forwardsList);
         }

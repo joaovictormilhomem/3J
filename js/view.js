@@ -13,6 +13,8 @@ const btnStock      = document.getElementById('btn_stock');
 const btnCash       = document.getElementById('btn_cash');
 const addButtons    = document.getElementsByClassName('add-btn');
 
+const historyBtnRequests = document.getElementById('history-btn-requests');
+
 let activePage = 1;
 
     // Navegação
@@ -256,18 +258,23 @@ function renderRequest(request) {
     newRequest.setAttribute('title', request.data().op);
 
     let newRequestStatus     = document.createElement('div');
-    newRequestStatus.ondblclick = () => {handleChangeRequestStatus(newRequest)};
+    if (request.data().status !== 'finished') newRequestStatus.ondblclick = () => {handleChangeRequestStatus(newRequest)};
     newRequestStatus.classList.add('request_status');
     newRequestStatus.classList.add('request_status_'+request.data().status);
+    newRequest.appendChild(newRequestStatus);
 
     let newRequestAddress       = document.createElement('h1');
     newRequestAddress.innerHTML = request.data().address;
     newRequestAddress.classList.add('request_address');
-
-    let newDeleteRequest       = document.createElement('p');
-    newDeleteRequest.innerHTML = 'Apagar';
-    newDeleteRequest.onclick   = () => {handleDeleteRequest(newRequest)};
-    newDeleteRequest.classList.add('deny-request', 'text-base');
+    newRequest.appendChild(newRequestAddress);
+    
+    if (request.data().status !== 'finished') {
+        let newDeleteRequest       = document.createElement('p');
+        newDeleteRequest.innerHTML = 'Apagar';
+        newDeleteRequest.onclick   = () => {handleDeleteRequest(newRequest)};
+        newDeleteRequest.classList.add('deny-request', 'text-base');
+        newRequest.appendChild(newDeleteRequest);
+    }
 
     let newRequestItems = document.createElement('h2');
     newRequestItems.classList.add('request_items');
@@ -279,11 +286,8 @@ function renderRequest(request) {
         newRequestItems.innerHTML = request.data().items.water+' águas';
     
     newRequestItems.innerHTML = newRequestItems.innerHTML+' por '+ request.data().value.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
-    
-    newRequest.appendChild(newRequestStatus);
-    newRequest.appendChild(newRequestAddress);
-    newRequest.appendChild(newDeleteRequest);
     newRequest.appendChild(newRequestItems);
+
     pageRequestsContainer.appendChild(newRequest);
 }
 
@@ -372,4 +376,10 @@ function renderCash(atualCash) {
     forwardNumberElement.innerHTML = atualCash.forward.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
     expenseNumberElement.innerHTML = atualCash.expense.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
     totalNumberElement.innerHTML   = atualCash.total.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+}
+
+historyBtnRequests.onclick = () => {
+    isHistoryRequestsOn = !isHistoryRequestsOn;
+    clearRequestsAndForwards();
+    handleRenderRequests();
 }

@@ -31,6 +31,10 @@
     background-color: #78E08F;
 }
 
+.request_status_finished{
+    background-color: #4A69BD;
+}
+
 .request_address{
     font-size: 2rem;
     font-weight: 500;

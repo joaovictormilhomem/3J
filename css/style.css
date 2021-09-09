@@ -56,7 +56,7 @@ body{
     background-color: #ADC2D1;
 }
 
-.add-btn{
+.fixed-btn{
     background-image: url(../assets/add_circle_black_24dp.svg);
     background-repeat: no-repeat;
     background-size: 100%;
@@ -71,6 +71,11 @@ body{
     user-select: none;
 
     display: block;
+}
+
+#history-btn-requests{
+    background-image: url(../assets/history.svg);
+    right: 100px;
 }
 
 @keyframes show{
