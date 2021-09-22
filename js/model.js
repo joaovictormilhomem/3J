@@ -2,6 +2,7 @@ let requestList = [];
 let p13Stock;
 let waterStock;
 let atualCash = {};
+let cashHistory = {};
 let day;
 
 // Firebase
@@ -28,7 +29,7 @@ function startFirebase() {
             appId: "1:940440141576:web:f56f9802ada74cd7d8b6bd"
         };
 
-        firebase.initializeApp(firebaseConfig);
+        firebase.initializeApp(firebaseConfigTest);
         firebase.analytics();
         
         db   = firebase.firestore()
@@ -55,6 +56,7 @@ function startLookingForChanges() {
     })
 
     let handleListenerCash = db.collection('cash').onSnapshot((collection) => {
+        cashHistory = collection.docs;
         collection.docs.forEach(item => {
             if (item.id === day) {
                 atualCash.incash = item.data().incash;
@@ -62,7 +64,7 @@ function startLookingForChanges() {
                 atualCash.pix = item.data().pix;
                 atualCash.forward = item.data().forward;
                 atualCash.expense = item.data().expense;
-                atualCash.incash = atualCash.incash - atualCash.expense;
+                atualCash.incashLessExpense = atualCash.incash - atualCash.expense;
                 atualCash.total = atualCash.incash + atualCash.card + atualCash.pix;
             }
             checkUndefinedCash();

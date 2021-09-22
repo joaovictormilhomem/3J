@@ -370,7 +370,7 @@ function renderCash(atualCash) {
     let expenseNumberElement = document.getElementById('expense_number');
     let totalNumberElement   = document.getElementById('total_number');
     
-    moneyNumberElement.innerHTML   = atualCash.incash.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+    moneyNumberElement.innerHTML   = atualCash.incashLessExpense.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
     cardNumberElement.innerHTML    = atualCash.card.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
     pixNumberElement.innerHTML     = atualCash.pix.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
     forwardNumberElement.innerHTML = atualCash.forward.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});

@@ -147,7 +147,7 @@ async function start() {
             atualCashCopy.forward = atualCash.forward;
             atualCashCopy.expense = atualCash.expense;
             atualCashCopy.total   = atualCash.total;
-            renderCash(atualCashCopy);
+            renderCash(atualCash);
         }
     }, 500);
 
