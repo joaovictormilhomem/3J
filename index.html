@@ -108,40 +108,52 @@
     </div>
   </div>
 
-  <div class='popup' id='new-request-popup'>
+  <div class='popup' id='new-request-popup'>        
     <div class='popup-container'>
 
       <label for='select-clients'>Cliente</label>
       <select name='select-clients' id='select-clients'>
         <option value='' selected>Sem cadastro</option>
-        <!-- <option value='João'>João</option>
-        <option value='Pedro'>Pedro</option> -->
       </select>
 
-      <label for='input-address'>Endereço</label>
-      <input type='text' id='input-request-address' name='input-address'>
+      <label for='input-request-address'>Endereço</label>
+      <input type='text' id='input-request-address' name='input-address' placeholder="Rua Fulano de tal, N° 000, Centro">
 
-      <label for='input-telephone'>Telefone</label>
-      <input type='text' id='input-request-telephone' name='input-telephone'>
-
+      <label for='input-request-telephone'>Telefone</label>
+      <input type='text' id='input-request-telephone' name='input-telephone' placeholder="(63) 12345-6789">
+      
+      <label for="input-request-products">Produtos</label>
       <div class="horizontal-inputs">
-        <label for='input-p13'>P13</label>
-        <input type='number' id='input-p13' name='input-p13'>
-
-        <label for='input-water'>Água</label>
-        <input type='number' id='input-water' name='input-water'>
-
-        <label for='input-value'>Valor</label>
-        <input type='number' id='input-value' name='input-value'>
+        <select name="input-request-products" id="input-request-products">
+          <option  value="p13" selected>Recarga P13</option>
+          <option value="water">Recarga Água</option>
+          <option value="p13Empty">Botijão vazio</option>
+          <option value="waterEmpty">Galão vazio</option>
+        </select>
+        <input type='number' id='input-amount-request-products' name='input-amount-request-products' placeholder="0">
+      </div>
+      <div class="horizontal-inputs">
+      <select name="input-request-products2" id="input-request-products2">
+        <option value="p13">Recarga P13</option>
+        <option value="water" selected>Recarga Água</option>
+        <option value="p13Empty">Botijão vazio</option>
+        <option value="waterEmpty">Galão vazio</option>
+      </select>
+      <input type='number' id='input-amount-request-products2' name='input-amount-request-products2' placeholder="0">
       </div>
 
-      <label for="input-op">Pagamento</label>
-      <select name="input-op" id="input-op">
-        <option value="incash">A vista</option>
-        <option value="card">Cartão</option>
-        <option value="pix">PIX</option>
-        <option value="forward">Pagar depois</option>
-      </select>
+      <label for="input-value">Pagamento</label>
+      <div class="horizontal-inputs">
+        <label for='input-value'>R$</label>
+        <input type='number' id='input-value' name='input-value' placeholder="00.00">
+
+        <select name="input-op" id="input-op">
+          <option value="incash">A vista</option>
+          <option value="card">Cartão</option>
+          <option value="pix">PIX</option>
+          <option value="forward">Pagar depois</option>
+        </select>
+      </div>
 
       <button id='new-popup-button-request'>Novo</button>
 
