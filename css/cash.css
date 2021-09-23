@@ -9,15 +9,13 @@
     width: 100%;
     height: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content:center;
     flex-wrap: wrap;
+    max-width: 800px;
+    margin: auto;
 }
 
-.page_cash_line{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content:space-evenly;
+#page_cash_container > div{
+    flex: 1 1 200px;
 }
 
 .icon_container_cash{
