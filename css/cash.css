@@ -1,17 +1,16 @@
 #page_cash{
-    width: 100%;
-    height: 100%;
     padding: 10px;
+    height: 100vh;
     display: none;
 }
 
 #page_cash_container{
     width: 100%;
-    height: 100%;
+    height: fit-content;
     display: flex;
     flex-wrap: wrap;
-    max-width: 800px;
-    margin: auto;
+    max-width: 750px;
+    margin: 10% auto;
 }
 
 #page_cash_container > div{
@@ -19,7 +18,6 @@
 }
 
 .icon_container_cash{
-    margin-top: 10%;
     height: fit-content;
     display: flex;
     flex-direction: column;
