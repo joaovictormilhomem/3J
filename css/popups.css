@@ -15,6 +15,7 @@
     
     user-select: none;
     display: none;
+    animation: fade-in 0.2s;
 }
 
 .popup-container{
