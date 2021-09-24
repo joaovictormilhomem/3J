@@ -286,7 +286,7 @@ function shortDate(timestamp) {
 }
 
 function checkUndefinedCash() {
-    keys = ['incash', 'card', 'pix', 'forward', 'expense', 'total'];
+    keys = ['incash', 'card', 'pix', 'forward', 'expense', 'total', 'incashLessExpense'];
 
     keys.forEach(key => {
         if(atualCash[key] === undefined || isNaN(atualCash[key]))
