@@ -63,3 +63,8 @@
     position: relative;
     bottom: 10px;
 }
+
+#history-btn-requests{
+    background-image: url(../assets/history.svg);
+    right: 100px;
+}

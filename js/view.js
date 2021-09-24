@@ -14,6 +14,7 @@ const btnCash       = document.getElementById('btn_cash');
 const addButtons    = document.getElementsByClassName('add-btn');
 
 const historyBtnRequests = document.getElementById('history-btn-requests');
+const historyBtnCash = document.getElementById('history-btn-cash');
 
 let activePage = 1;
 
@@ -382,4 +383,8 @@ historyBtnRequests.onclick = () => {
     isHistoryRequestsOn = !isHistoryRequestsOn;
     clearRequestsAndForwards();
     handleRenderRequests();
+}
+
+historyBtnCash.onclick = () => {
+    console.log(historyBtnCash);
 }

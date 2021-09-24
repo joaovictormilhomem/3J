@@ -29,7 +29,7 @@ function startFirebase() {
             appId: "1:940440141576:web:f56f9802ada74cd7d8b6bd"
         };
 
-        firebase.initializeApp(firebaseConfig);
+        firebase.initializeApp(firebaseConfigTest);
         firebase.analytics();
         
         db   = firebase.firestore()
@@ -65,7 +65,7 @@ function startLookingForChanges() {
                 atualCash.forward = item.data().forward;
                 atualCash.expense = item.data().expense;
                 atualCash.incashLessExpense = atualCash.incash - atualCash.expense;
-                atualCash.total = atualCash.incash + atualCash.card + atualCash.pix;
+                atualCash.total = atualCash.incashLessExpense + atualCash.card + atualCash.pix;
             }
             checkUndefinedCash();
         })

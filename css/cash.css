@@ -28,3 +28,8 @@
 .cash_icon{
     width: 150px;
 }
+
+#history-btn-cash{
+    background-image: url(../assets/history.svg);
+    right: 100px;
+}
