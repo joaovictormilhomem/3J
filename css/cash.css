@@ -9,7 +9,7 @@
     height: fit-content;
     display: flex;
     flex-wrap: wrap;
-    max-width: 800px;
+    max-width: 900px;
     margin: 5% auto;
 }
 
@@ -27,6 +27,19 @@
 
 .cash_icon{
     width: 150px;
+}
+
+#cash_day{
+    background-image: none;
+    color: black;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 400;
+    position: fixed;
+    right: 175px;
+    bottom: 25px;
+    user-select: none;
+    display: block;
 }
 
 #history-btn-cash{

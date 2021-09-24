@@ -29,7 +29,7 @@ function startFirebase() {
             appId: "1:940440141576:web:f56f9802ada74cd7d8b6bd"
         };
 
-        firebase.initializeApp(firebaseConfigTest);
+        firebase.initializeApp(firebaseConfig);
         firebase.analytics();
         
         db   = firebase.firestore()
@@ -67,7 +67,7 @@ function startLookingForChanges() {
                 atualCash.incashLessExpense = atualCash.incash - atualCash.expense;
                 atualCash.total = atualCash.incashLessExpense + atualCash.card + atualCash.pix;
             }
-            checkUndefinedCash();
+            checkUndefinedCash(atualCash);
         })
     })
 }
@@ -221,7 +221,6 @@ function updateStockValue(item, value) {
 }
 
 function updateCashValue() {
-    checkUndefinedCash();
     db.collection('cash').doc(day).set({
         incash: atualCash.incash,
         card: atualCash.card,
@@ -285,12 +284,12 @@ function shortDate(timestamp) {
     return dateString;
 }
 
-function checkUndefinedCash() {
+function checkUndefinedCash(cash) {
     keys = ['incash', 'card', 'pix', 'forward', 'expense', 'total', 'incashLessExpense'];
 
     keys.forEach(key => {
-        if(atualCash[key] === undefined || isNaN(atualCash[key]))
-            atualCash[key] = 0;
+        if(cash[key] === undefined || isNaN(cash[key]))
+            cash[key] = 0;
     });
 }
 

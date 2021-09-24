@@ -100,6 +100,7 @@
             <div class='icon_number' id='expense_number'></div>
           </div>
       </div>
+      <h1 id="cash_day" class="text-base"></h1>
       <div class='fixed-btn' id='history-btn-cash' title="histórico do caixa"></div>
       <div class='add-btn fixed-btn' id='add-btn-cash' title="lançar despesa"></div>
     </div>
@@ -204,8 +205,17 @@
       <input type="text" id='input-expense-notes' name='input-expense-notes'>
 
       <button id='new-expense-button'>Lançar despesa</button>
-
       <button id='close-expense-popup-button' class="close-popup-button">X</button>
+    </div>
+  </div>
+
+  <div class="popup" id="date-picker-popup">
+    <div class="popup-container" id="date-picker-popup-container">
+      <label for="date-picker">Escolha uma data</label>
+      <input type="date" id="date-picker" name="date-picker">
+
+      <button id='date-picker-button'>Ok</button>
+      <button id='close-date-picker-popup-button' class="close-popup-button">X</button>
     </div>
   </div>
 

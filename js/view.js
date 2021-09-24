@@ -109,6 +109,19 @@ function closeNewForwardPaymentPopup() {
     newForwardPaymentPopup.style.display = 'none';
 }
 
+function closeDatePickerPopup() {
+    let datePickerPopup  = document.getElementById('date-picker-popup');
+    datePickerPopup.style.display = 'none';
+}
+
+function showCashDay() {
+    cashDayElement = document.getElementById('cash_day');
+    if (cashDay !== day)
+        cashDayElement.innerHTML = cashDay.replaceAll('-', '/');
+    else
+        cashDayElement.innerHTML = '';
+}
+
     // Outros
 
 function deleteFormFields(fields) {
@@ -167,11 +180,11 @@ function startNewClientPopup() {
 
 function startNewExpensePopup() {
     let newExpenseCloseBtn = document.getElementById('close-expense-popup-button');
-    let newExpenseButton   = document.getElementById('new-expense-button');
+    let newExpenseBtn      = document.getElementById('new-expense-button');
 
     newExpenseCloseBtn.onclick = () => closeNewExpensePopup();
 
-    newExpenseButton.onclick = () => {
+    newExpenseBtn.onclick = () => {
         let valueElement = document.getElementById('input-expense-value');
         let itemElement  = document.getElementById('input-expense-item');
         let notesElement = document.getElementById('input-expense-notes');
@@ -184,6 +197,23 @@ function startNewExpensePopup() {
             deleteFormFields([valueElement, notesElement]);
         }
     }
+}
+
+function showAndStartDatePickerPopup() {
+    let datePickerPopup  = document.getElementById('date-picker-popup');
+    let datePickerBtn           = document.getElementById('date-picker-button');
+    let closeDatePickerPopupBtn = document.getElementById('close-date-picker-popup-button');
+    let datePicker              = document.getElementById('date-picker');
+
+    closeDatePickerPopupBtn.onclick = () => closeDatePickerPopup();
+    datePickerBtn.onclick = () => {
+        let selectedDay = formatDateOfDatePicker(datePicker.value);
+        cashDay = selectedDay;
+        showCashDay();
+        datePickerPopup.style.display = 'none';
+    }
+    datePickerPopup.style.display = 'flex';
+    datePicker.focus();
 }
 
 function showAndStartNewForwardPaymentPopup(forward) {
@@ -356,6 +386,13 @@ function formatNotes(request) {
     return notes;
 }
 
+function formatDateOfDatePicker(date) {
+    if (date[5] == 0)
+        return formatedDate = date[8]+date[9]+date[7]+date[6]+date[4]+date[0]+date[1]+date[2]+date[3];
+    else
+        return formatedDate = date[8]+date[9]+date[7]+date[5]+date[6]+date[4]+date[0]+date[1]+date[2]+date[3];
+}
+
 function renderStock(p13Stock, waterStock) {
     let gasNumberElement         = document.getElementById('gas_number');
     let waterNumberElement       = document.getElementById('water_number');
@@ -363,7 +400,7 @@ function renderStock(p13Stock, waterStock) {
     waterNumberElement.innerHTML = waterStock
 }
 
-function renderCash(atualCash) {
+function renderCash(cash) {
     let moneyNumberElement   = document.getElementById('money_number');
     let cardNumberElement    = document.getElementById('card_number');
     let pixNumberElement     = document.getElementById('pix_number');
@@ -371,12 +408,12 @@ function renderCash(atualCash) {
     let expenseNumberElement = document.getElementById('expense_number');
     let totalNumberElement   = document.getElementById('total_number');
     
-    moneyNumberElement.innerHTML   = atualCash.incashLessExpense.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
-    cardNumberElement.innerHTML    = atualCash.card.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
-    pixNumberElement.innerHTML     = atualCash.pix.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
-    forwardNumberElement.innerHTML = atualCash.forward.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
-    expenseNumberElement.innerHTML = atualCash.expense.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
-    totalNumberElement.innerHTML   = atualCash.total.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+    moneyNumberElement.innerHTML   = cash.incashLessExpense.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+    cardNumberElement.innerHTML    = cash.card.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+    pixNumberElement.innerHTML     = cash.pix.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+    forwardNumberElement.innerHTML = cash.forward.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+    expenseNumberElement.innerHTML = cash.expense.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+    totalNumberElement.innerHTML   = cash.total.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
 }
 
 historyBtnRequests.onclick = () => {
@@ -386,5 +423,5 @@ historyBtnRequests.onclick = () => {
 }
 
 historyBtnCash.onclick = () => {
-    console.log(historyBtnCash);
+    showAndStartDatePickerPopup();
 }

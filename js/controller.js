@@ -3,6 +3,8 @@ let p13StockCopy;
 let waterStockCopy;
 let atualCashCopy = {};
 let isHistoryRequestsOn = false;
+let cashDay;
+let selectedCash = {};
 
 function handleDeleteRequest(requestElement) {
     let id         = requestElement.getAttribute('data-id');
@@ -33,7 +35,6 @@ function handleRenderForwards(forwards) {
 function handleNewExpenseClick(value, item, notes){
     if (value !== '' && value >= 0.1 && !isNaN(value)){
         createExpense(value, item, notes);
-        checkUndefinedCash();
         updateExpenseCashValue(value + atualCash.expense);
     }
     else return 1;
@@ -120,13 +121,13 @@ function startSearch() {
 
 async function start() {
     day = getCurrentDate();
+    cashDay = day;
     let checkStartFirebase = await startFirebase();
     startNewExpensePopup();
     startNewRequestPopup();
     startNewClientPopup();
     startAddButtons();
     startLookingForChanges();
-    checkUndefinedCash();
     startSearch();
 
     let autoRenderRequestsAndForwards = setInterval(() => {
@@ -140,15 +141,30 @@ async function start() {
     }, 500)
 
     let autoRenderCash = setInterval(() => {
-        if (atualCash !== atualCashCopy) {
-            atualCashCopy.incash  = atualCash.incash;
-            atualCashCopy.card    = atualCash.card;
-            atualCashCopy.pix     = atualCash.pix;
-            atualCashCopy.forward = atualCash.forward;
-            atualCashCopy.expense = atualCash.expense;
-            atualCashCopy.total   = atualCash.total;
-            renderCash(atualCash);
-        }
+        let dateExists = false;
+        cashHistory.forEach(item => {
+            if (item.id === cashDay) {
+                selectedCash.incash = item.data().incash;
+                selectedCash.card = item.data().card;
+                selectedCash.pix = item.data().pix;
+                selectedCash.forward = item.data().forward;
+                selectedCash.expense = item.data().expense;
+                selectedCash.incashLessExpense = selectedCash.incash - selectedCash.expense;
+                selectedCash.total = selectedCash.incashLessExpense + selectedCash.card + selectedCash.pix;
+                dateExists = true;
+            }
+            if (!dateExists) {
+                selectedCash.incash = 'ERRO';
+                selectedCash.card = 'ERRO';
+                selectedCash.pix = 'ERRO';
+                selectedCash.forward = 'ERRO';
+                selectedCash.expense = 'ERRO';
+                selectedCash.incashLessExpense = 'ERRO';
+                selectedCash.total = 'ERRO';
+            }
+            checkUndefinedCash(selectedCash);
+            renderCash(selectedCash);
+        });
     }, 500);
 
     let autoRenderStock = setInterval(() => {
