@@ -9,12 +9,13 @@
     height: fit-content;
     display: flex;
     flex-wrap: wrap;
-    max-width: 750px;
-    margin: 10% auto;
+    max-width: 800px;
+    margin: 5% auto;
 }
 
 #page_cash_container > div{
     flex: 1 1 200px;
+    margin: 30px;
 }
 
 .icon_container_cash{
