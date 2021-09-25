@@ -322,6 +322,11 @@ function renderRequest(request) {
     pageRequestsContainer.appendChild(newRequest);
 }
 
+function clearRequests() {
+    pageRequestsContainer.innerHTML = '';
+    startAddButtons();
+}
+
 function clearRequestsAndForwards() {
     pageRequestsContainer.innerHTML = '';
     pageForwardsContainer.innerHTML = '';
@@ -418,7 +423,7 @@ function renderCash(cash) {
 
 historyBtnRequests.onclick = () => {
     isHistoryRequestsOn = !isHistoryRequestsOn;
-    clearRequestsAndForwards();
+    clearRequests();
     handleRenderRequests();
 }
 
