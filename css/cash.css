@@ -41,8 +41,3 @@
     user-select: none;
     display: block;
 }
-
-#history-btn-cash{
-    background-image: url(../assets/history.svg);
-    right: 100px;
-}

@@ -36,6 +36,7 @@ function startFirebase() {
         auth = firebase.auth();
 
         let loginIsDone = login('teste@teste.com','123123');
+        startLookingForChanges();
         resolve(loginIsDone);
     })
 }

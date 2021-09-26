@@ -16,6 +16,7 @@
   <link rel='stylesheet' href='./css/management.css'>
   <link rel='stylesheet' href='./css/popups.css'>
   <link rel="stylesheet" href="./css/forwards.css">
+  <link rel="stylesheet" href="./css/fixed-buttons.css">
 </head>
 
 <body>
@@ -36,8 +37,11 @@
 
     <div id='page_requests'>
       <div id='page_requests_container'>Carregando...</div>
-      <div class='fixed-btn' id='history-btn-requests' title="histórico de pedidos do dia"></div>
-      <div class='add-btn fixed-btn' id='add-btn-requests' title="criar pedido"></div>
+      <div class="fixed-buttons-container" id="requests-fixed-buttons">
+        <!-- <div class='fixed-button history-button' id='history-button-requests' title="Histórico de pedidos"></div> -->
+        <div class='fixed-button done-button' id='done-button-requests' title="Pedidos entregues hoje"></div>
+        <div class='add-button fixed-button' id='add-button-requests' title="criar pedido"></div>
+      </div>
     </div>
 
     <div id='page_forwards'>
@@ -49,7 +53,9 @@
 
     <div id='page_customers'>
       <div id='page_customers_container'>page_customers</div>
-      <div class='add-btn fixed-btn' title="adicionar cliente"></div>
+      <div class="fixed-buttons-container" id="requests-fixed-buttons">
+        <div class='add-button fixed-button' title="adicionar cliente"></div>
+      </div>
     </div>
 
     <div id='page_stock'>
@@ -101,8 +107,10 @@
           </div>
       </div>
       <h1 id="cash_day" class="text-base"></h1>
-      <div class='fixed-btn' id='history-btn-cash' title="histórico do caixa"></div>
-      <div class='add-btn fixed-btn' id='add-btn-cash' title="lançar despesa"></div>
+      <div class="fixed-buttons-container" id="cash-fixed-buttons">
+        <div class='fixed-button history-button' id='history-button-cash' title="histórico do caixa"></div>
+        <div class='add-button fixed-button' id='add-button-cash' title="lançar despesa"></div>
+      </div>
     </div>
   </div>
 

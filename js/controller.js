@@ -127,7 +127,6 @@ async function start() {
     startNewRequestPopup();
     startNewClientPopup();
     startAddButtons();
-    startLookingForChanges();
     startSearch();
 
     let autoRenderRequestsAndForwards = setInterval(() => {

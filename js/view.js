@@ -11,10 +11,11 @@ const btnForwards   = document.getElementById('btn_forwards');
 const btnCustomers  = document.getElementById('btn_customers');
 const btnStock      = document.getElementById('btn_stock');
 const btnCash       = document.getElementById('btn_cash');
-const addButtons    = document.getElementsByClassName('add-btn');
+const addButtons    = document.getElementsByClassName('add-button');
 
-const historyBtnRequests = document.getElementById('history-btn-requests');
-const historyBtnCash = document.getElementById('history-btn-cash');
+const historyBtnRequests = document.getElementById('history-button-requests');
+const historyBtnCash     = document.getElementById('history-button-cash');
+const doneBtnRequests    = document.getElementById('done-button-requests');
 
 let activePage = 1;
 
@@ -421,7 +422,7 @@ function renderCash(cash) {
     totalNumberElement.innerHTML   = cash.total.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
 }
 
-historyBtnRequests.onclick = () => {
+doneBtnRequests.onclick = () => {
     isHistoryRequestsOn = !isHistoryRequestsOn;
     clearRequests();
     handleRenderRequests();
