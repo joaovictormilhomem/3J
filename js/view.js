@@ -83,14 +83,15 @@ function closeNewExpensePopup() {
 
 function closeNewRequestPopup(){
     const addressElement   = document.getElementById('input-request-address');
-    const p13Element       = document.getElementById('input-p13');
-    const waterElement     = document.getElementById('input-water');
     const valueElement     = document.getElementById('input-value');
     const opElement        = document.getElementById('input-op');
     const telephoneElement = document.getElementById('input-request-telephone');
-    const newPopup         = document.getElementById('new-request-popup');
+    const newPopup         = document.getElementById('new-request-popup');    const reqProductsElement        = document.getElementById('input-request-products');
+    const amountReqProductsElement  = document.getElementById('input-amount-request-products');
+    const amountReqProductsElement2 = document.getElementById('input-amount-request-products2');
     
-    deleteFormFields([addressElement, p13Element, waterElement, valueElement, telephoneElement, opElement]);
+    
+    deleteFormFields([addressElement, amountReqProductsElement, amountReqProductsElement2, valueElement, telephoneElement, opElement]);
     newPopup.style.display = 'none';
 }
 
@@ -115,37 +116,38 @@ function deleteFormFields(fields) {
 }
 
 function startNewRequestPopup() {
-    const newButton            = document.getElementById('new-popup-button-request');
-    const closeButton          = document.getElementById('close-popup-button-request');
-    const clientElement        = document.getElementById('select-clients');
-    const addressElement       = document.getElementById('input-request-address');
-    const telephoneElement     = document.getElementById('input-request-telephone');
-    const p13Element           = document.getElementById('input-p13');
-    const waterElement         = document.getElementById('input-water');
-    const valueElement         = document.getElementById('input-value');
-    const opElement            = document.getElementById('input-op');
+    const newButton                 = document.getElementById('new-popup-button-request');
+    const closeButton               = document.getElementById('close-popup-button-request');
+    const clientElement             = document.getElementById('select-clients');
+    const addressElement            = document.getElementById('input-request-address');
+    const telephoneElement          = document.getElementById('input-request-telephone');
+    const reqProductsElement        = document.getElementById('input-request-products');
+    const reqProducts2Element       = document.getElementById('input-request-products2');
+    const amountReqProductsElement  = document.getElementById('input-amount-request-products');
+    const amountReqProductsElement2 = document.getElementById('input-amount-request-products2');
+    const valueElement              = document.getElementById('input-value');
+    const opElement                 = document.getElementById('input-op');
 
     closeButton.onclick = () => closeNewRequestPopup();
     newButton.onclick = () => {
         let client    = clientElement.value;
         let address   = addressElement.value;
-        let items     = {p13: p13Element.value, water: waterElement.value};
+        let telephone = telephoneElement.value;
+        let items     = {};
         let value     = parseFloat(valueElement.value);
         let op        = opElement.value;
-        let telephone = telephoneElement.value;
+
+        if (amountReqProductsElement.value > 0 || amountReqProductsElement2.value > 0)
+            items = {[reqProductsElement.value]: parseInt(amountReqProductsElement.value), [reqProducts2Element.value]: parseInt(amountReqProductsElement2.value)};
         
         let response = handleCreateRequest(client, address, telephone, items, value, op);
-
-        if (response === 0) {
-            closeNewRequestPopup();
-            clientElement.value = null;
+        
+        switch (response) {
+            case 0: closeNewRequestPopup(); clientElement.value = ''; break;
+            case 1: alert('preencha todos os campos corretamente'); break;
+            case 2: alert('Não temos estoque suficiente!'); break;
+            default: break;
         }
-        else
-            switch (response) {
-                case 1: alert('preencha todos os campos corretamente'); break;
-                case 2: alert('Não temos estoque suficiente!'); break;
-                default: break;
-            }
     }
 }
 
@@ -231,17 +233,53 @@ function renderClient(client) {
 
     let newRequestItems = document.createElement('h2');
     newRequestItems.classList.add('request_items');
-    if(request.data().items.p13 && request.data().items.water)
-        newRequestItems.innerHTML = request.data().items.p13+' gás P13 e '+request.data().items.water+' água';
-    else if(request.data().items.p13)
-        newRequestItems.innerHTML = request.data().items.p13+' gás P13';
-    else if(request.data().items.water)
-        newRequestItems.innerHTML = request.data().items.water+' águas';
+    newRequestItems.innerHTML = createItemNotes(request);
     
     newRequest.appendChild(newClientName);
     newRequest.appendChild(newDeleteClient);
     newRequest.appendChild(newRequestItems);
     pageRequests.appendChild(newRequest);
+}
+
+function countProps(obj) {
+    let number = 0;
+    for (const item in obj) {
+        number++;
+    }
+    return number;
+}
+
+function createItemNotes(request) {
+    let pluralTranslations = {
+        p13: ' recargas de gás',
+        water: ' recargas de água',
+        p13Empty: ' butijões de gás vazios',
+        waterEmpty: ' galões de água vazios'
+    }
+    let singularTranslations = {
+        p13: ' recarga de gás',
+        water: ' recarga de água',
+        p13Empty: ' butijão de gás vazio',
+        waterEmpty: ' galão de água vazio'
+    }
+    let items = request.data().items;
+    let numberOfItems = countProps(items);
+    let notes = '';
+    let forinIndex = 1;
+
+    for (const item in items) {
+        if (forinIndex > 1 && numberOfItems > 1) notes = notes  + ' e ';
+
+        if (items[item] > 1)
+            notes = notes + items[item] + pluralTranslations[item];
+        else
+            notes = notes + items[item] + singularTranslations[item];
+
+        forinIndex++;
+    }
+
+    notes = notes +' por '+ request.data().value.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+    return notes;
 }
 
 function renderRequest(request) {
@@ -252,6 +290,8 @@ function renderRequest(request) {
     newRequest.setAttribute('data-status', request.data().status);
     newRequest.setAttribute('data-p13', request.data().items.p13);
     newRequest.setAttribute('data-water', request.data().items.water);
+    newRequest.setAttribute('data-p13Empty', request.data().items.p13Empty);
+    newRequest.setAttribute('data-waterEmpty', request.data().items.waterEmpty);
     newRequest.setAttribute('data-value', request.data().value);
     newRequest.setAttribute('data-cash-op', request.data().op);
     newRequest.setAttribute('data-telephone', request.data().telephone);
@@ -271,21 +311,15 @@ function renderRequest(request) {
     if (request.data().status !== 'finished') {
         let newDeleteRequest       = document.createElement('p');
         newDeleteRequest.innerHTML = 'Apagar';
-        newDeleteRequest.onclick   = () => {handleDeleteRequest(newRequest)};
+        newDeleteRequest.ondblclick   = () => {handleDeleteRequest(newRequest)};
         newDeleteRequest.classList.add('deny-request', 'text-base');
         newRequest.appendChild(newDeleteRequest);
     }
 
     let newRequestItems = document.createElement('h2');
     newRequestItems.classList.add('request_items');
-    if(request.data().items.p13 && request.data().items.water)
-        newRequestItems.innerHTML = request.data().items.p13+' gás P13 e '+request.data().items.water+' água';
-    else if(request.data().items.p13)
-        newRequestItems.innerHTML = request.data().items.p13+' gás P13';
-    else if(request.data().items.water)
-        newRequestItems.innerHTML = request.data().items.water+' águas';
-    
-    newRequestItems.innerHTML = newRequestItems.innerHTML+' por '+ request.data().value.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+    newRequestItems.innerHTML = createItemNotes(request);
+
     newRequest.appendChild(newRequestItems);
 
     pageRequestsContainer.appendChild(newRequest);
@@ -355,11 +389,15 @@ function formatNotes(request) {
     return notes;
 }
 
-function renderStock(p13Stock, waterStock) {
+function renderStock(stock) {
     let gasNumberElement         = document.getElementById('gas_number');
     let waterNumberElement       = document.getElementById('water_number');
-    gasNumberElement.innerHTML   = p13Stock;
-    waterNumberElement.innerHTML = waterStock
+    let gasEmptyNumberElement    = document.getElementById('gas_empty_number');
+    let waterEmptyNumberElement  = document.getElementById('water_empty_number');
+    gasNumberElement.innerHTML   = stock.p13;
+    waterNumberElement.innerHTML = stock.water;
+    gasEmptyNumberElement.innerHTML = stock.p13Empty;
+    waterEmptyNumberElement.innerHTML = stock.waterEmpty;
 }
 
 function renderCash(atualCash) {

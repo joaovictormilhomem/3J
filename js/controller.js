@@ -1,6 +1,5 @@
 let requestListCopy = [];
-let p13StockCopy;
-let waterStockCopy;
+let atualStockCopy = {};
 let atualCashCopy = {};
 let isHistoryRequestsOn = false;
 
@@ -9,9 +8,11 @@ function handleDeleteRequest(requestElement) {
     let collection = requestElement.getAttribute('data-collection');
     let p13        = parseInt(requestElement.getAttribute('data-p13'));
     let water      = parseInt(requestElement.getAttribute('data-water'));
+    let p13Empty   = parseInt(requestElement.getAttribute('data-p13Empty'));
+    let waterEmpty = parseInt(requestElement.getAttribute('data-waterEmpty'));
 
     deleteRequest(id, collection);
-    handleUpdateStock(p13, water, false);
+    handleUpdateStock(p13, water, p13Empty, waterEmpty, false);
 }
 
 function handleRenderRequests() {
@@ -39,18 +40,19 @@ function handleNewExpenseClick(value, item, notes){
     else return 1;
 }
 
-function handleCreateRequest(client, address, telephone, items, value, op) {   
-    if(isFilled([address, items.p13, items.water, value]) && (items.p13 >= 1 || items.water >= 1)) {
-        if(p13Stock >= items.p13 && waterStock >= items.water) {
+function handleCreateRequest(client, address, telephone, items, value, op) {
+    items = deleteNaNAndDuplicatedProps(items);
+    if(isFilled([address, op, items], value)) {
+        if(checkIfThereIsStock(items)) {
             createRequest(client, address, telephone, items, value, op);
-            handleUpdateStock(items.p13, items.water, true);
-            return 0;
+            handleUpdateStock(items.p13, items.water, items.p13Empty, items.waterEmpty, true);
+            return 0; // Tudo certo
         }
         else
-            return 2;
+            return 2; // Sem estoque
     }
     else
-        return 1;
+        return 1; // Não preencheu corretamente
 }
 
 function handleChangeRequestStatus(requestElement) {
@@ -82,14 +84,18 @@ function handlePayForward(valueToBePaid, paymentMethod, forward) {
     else return 1;
 }
 
-function handleUpdateStock(p13, water, op) {
-    if (op) {
-        if (p13 > 0) updateStockValue('p13', p13Stock - p13);
-        if(water > 0) updateStockValue('water', waterStock - water);
+function handleUpdateStock(p13, water, p13Empty, waterEmpty, isToDecrease) {
+    if (isToDecrease) {
+        if(p13 > 0) updateStockValue('p13', atualStock.p13 - p13);
+        if(water > 0) updateStockValue('water', atualStock.water - water);
+        if(p13Empty > 0) updateStockValue('p13Empty', atualStock.p13Empty - p13Empty);
+        if(waterEmpty > 0) updateStockValue('waterEmpty', atualStock.waterEmpty - waterEmpty);
     }
     else{
-        if (p13 > 0) updateStockValue('p13', p13Stock + p13);
-        if(water > 0) updateStockValue('water', waterStock + water);
+        if(p13 > 0) updateStockValue('p13', atualStock.p13 + p13);
+        if(water > 0) updateStockValue('water', atualStock.water + water);
+        if(p13Empty > 0) updateStockValue('p13Empty', atualStock.p13Empty + p13Empty);
+        if(waterEmpty > 0) updateStockValue('waterEmpty', atualStock.waterEmpty + waterEmpty);
     }
 }
 
@@ -140,7 +146,7 @@ async function start() {
     }, 500)
 
     let autoRenderCash = setInterval(() => {
-        if (atualCash !== atualCashCopy) {
+        if (!isEqualObjects(atualCash, atualCashCopy)) {
             atualCashCopy.incash  = atualCash.incash;
             atualCashCopy.card    = atualCash.card;
             atualCashCopy.pix     = atualCash.pix;
@@ -152,10 +158,12 @@ async function start() {
     }, 500);
 
     let autoRenderStock = setInterval(() => {
-        if (p13Stock !== p13StockCopy || waterStock !== waterStockCopy) {
-            waterStockCopy = waterStock;
-            p13StockCopy = p13Stock;
-            renderStock(p13StockCopy, waterStockCopy);
+        if (!isEqualObjects(atualStock, atualStockCopy)) {
+            atualStockCopy.p13 = atualStock.p13;
+            atualStockCopy.water = atualStock.water;
+            atualStockCopy.p13Empty = atualStock.p13Empty;
+            atualStockCopy.waterEmpty = atualStock.waterEmpty;
+            renderStock(atualStockCopy);
         }
     }, 500);
 }

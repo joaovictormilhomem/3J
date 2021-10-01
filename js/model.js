@@ -1,6 +1,5 @@
 let requestList = [];
-let p13Stock;
-let waterStock;
+let atualStock = {};
 let atualCash = {};
 let day;
 
@@ -28,7 +27,7 @@ function startFirebase() {
             appId: "1:940440141576:web:f56f9802ada74cd7d8b6bd"
         };
 
-        firebase.initializeApp(firebaseConfig);
+        firebase.initializeApp(firebaseConfigTest);
         firebase.analytics();
         
         db   = firebase.firestore()
@@ -46,12 +45,8 @@ function startLookingForChanges() {
 
     let handleListenerStock = db.collection('stock').onSnapshot((collection) => {
         collection.docs.forEach(item => {
-            if (item.id === 'water')
-                waterStock = item.data().number;
-            else //if (item.id === 'p13')
-                p13Stock = item.data().number;
+            atualStock[item.id] = item.data().number;
         });
-        p13Stock
     })
 
     let handleListenerCash = db.collection('cash').onSnapshot((collection) => {
@@ -258,13 +253,17 @@ function wasNotDeletedOrFinished(request) {
     return request.data().status !== 'deleted' && request.data().status !== 'finished';
 }
 
-function isFilled(values) {
+function isFilled(stringsAndObjects, value) {
     filled = true;
-    values.forEach(value => {
-        if (value === '' || value === null || value === undefined){
+
+    stringsAndObjects.forEach(item => {
+        if (item === '' || item === null || item === undefined || JSON.stringify(item) === JSON.stringify({})){
             filled = false;
         }
     });
+
+    if (isNaN(value)) filled = false;
+
     return filled;
 }
 
@@ -292,4 +291,27 @@ function checkUndefinedCash() {
     });
 }
 
-console.log();
+function isEqualObjects(object1, object2) {
+    return JSON.stringify(object1) === JSON.stringify(object2);
+}
+
+function deleteNaNAndDuplicatedProps(obj) {
+    let newObj = {};
+    let firsProp;
+    for(const prop in obj) {
+        if (!isNaN(obj[prop]) && obj[prop] !== firsProp) {
+            if (obj[prop] > 0) newObj[prop] = obj[prop];
+        }
+        firsProp = prop;
+    }
+    return newObj;
+}
+
+function checkIfThereIsStock(items) {
+    for(const item in items) {
+        if (atualStock[item] < items[item]) {
+            return false;
+        }
+    }
+    return true;
+}
