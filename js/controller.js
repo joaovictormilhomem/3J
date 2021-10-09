@@ -84,18 +84,30 @@ function handlePayForward(valueToBePaid, paymentMethod, forward) {
     else return 1;
 }
 
-function handleUpdateStock(p13, water, p13Empty, waterEmpty, isToDecrease) {
+async function handleUpdateStock(p13, water, p13Empty, waterEmpty, isToDecrease) {
     if (isToDecrease) {
-        if(p13 > 0) updateStockValue('p13', atualStock.p13 - p13);
-        if(water > 0) updateStockValue('water', atualStock.water - water);
-        if(p13Empty > 0) updateStockValue('p13Empty', atualStock.p13Empty - p13Empty);
-        if(waterEmpty > 0) updateStockValue('waterEmpty', atualStock.waterEmpty - waterEmpty);
+        if(p13 > 0){
+            await updateStockValue('p13', atualStock.p13 - p13);
+            await updateStockValue('p13Empty', atualStock.p13Empty + p13);
+        }
+        if(water > 0){
+            await updateStockValue('water', atualStock.water - water);
+            await updateStockValue('waterEmpty', atualStock.waterEmpty + water);
+        }
+        if(p13Empty > 0) await updateStockValue('p13Empty', atualStock.p13Empty - p13Empty);
+        if(waterEmpty > 0) await updateStockValue('waterEmpty', atualStock.waterEmpty - waterEmpty);
     }
     else{
-        if(p13 > 0) updateStockValue('p13', atualStock.p13 + p13);
-        if(water > 0) updateStockValue('water', atualStock.water + water);
-        if(p13Empty > 0) updateStockValue('p13Empty', atualStock.p13Empty + p13Empty);
-        if(waterEmpty > 0) updateStockValue('waterEmpty', atualStock.waterEmpty + waterEmpty);
+        if(p13 > 0){
+            await updateStockValue('p13', atualStock.p13 + p13);
+            await updateStockValue('p13Empty', atualStock.p13Empty - p13);
+        }
+        if(water > 0){
+            await updateStockValue('water', atualStock.water + water);
+            await updateStockValue('waterEmpty', atualStock.waterEmpty - water);
+        }
+        if(p13Empty > 0) await updateStockValue('p13Empty', atualStock.p13Empty + p13Empty);
+        if(waterEmpty > 0) await updateStockValue('waterEmpty', atualStock.waterEmpty + waterEmpty);
     }
 }
 

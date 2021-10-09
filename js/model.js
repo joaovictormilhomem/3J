@@ -205,11 +205,15 @@ function deleteClient(id, collection) {
 }
 
 function updateStockValue(item, value) {
-    db.collection('stock').doc(item).update({
-        number: value
-    }).then(() => {
-    }).catch(error => {
-        console.log(error);
+    return new Promise(resolve => {
+        db.collection('stock').doc(item).update({
+            number: value
+        }).then(() => {
+            resolve(true);
+        }).catch(error => {
+            console.log(error);
+            reject(error);
+        })
     })
 }
 
