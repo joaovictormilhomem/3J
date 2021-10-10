@@ -393,10 +393,18 @@ function formatNotes(request) {
 }
 
 function formatDateOfDatePicker(date) {
-    if (date[5] == 0)
-        return formatedDate = date[8]+date[9]+date[7]+date[6]+date[4]+date[0]+date[1]+date[2]+date[3];
+    let formatedDate = '';
+    if (date[8] == 0)
+        formatedDate = date[9];
     else
-        return formatedDate = date[8]+date[9]+date[7]+date[5]+date[6]+date[4]+date[0]+date[1]+date[2]+date[3];
+        formatedDate = date[8]+date[9];
+
+    if (date[5] == 0)
+        formatedDate = formatedDate + date[7]+date[6]+date[4]+date[0]+date[1]+date[2]+date[3];
+    else
+        formatedDate = formatedDate + date[7]+date[5]+date[6]+date[4]+date[0]+date[1]+date[2]+date[3];
+
+    return formatedDate;
 }
 
 function renderStock(p13Stock, waterStock) {
