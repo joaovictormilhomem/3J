@@ -293,5 +293,3 @@ function checkUndefinedCash(cash) {
             cash[key] = 0;
     });
 }
-
-console.log();
