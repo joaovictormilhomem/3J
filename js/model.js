@@ -53,7 +53,6 @@ function startLookingForChanges() {
             else //if (item.id === 'p13')
                 p13Stock = item.data().number;
         });
-        p13Stock
     })
 
     let handleListenerCash = db.collection('cash').onSnapshot((collection) => {
