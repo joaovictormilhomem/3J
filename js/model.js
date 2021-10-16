@@ -50,7 +50,7 @@ function startLookingForChanges() {
         collection.docs.forEach(item => {
             if (item.id === 'water')
                 waterStock = item.data().number;
-            else //if (item.id === 'p13')
+            else if (item.id === 'p13')
                 p13Stock = item.data().number;
         });
     })
